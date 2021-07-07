@@ -15,9 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res) => {
-  res.json({ message: 'test !' });
-});
+
 //permet de lire le corps de la requête d'un objet JSON entrant pour rendre l'objet utilisable.cette fonction est utilisé sur toutes les routes de l'API
 
 app.use(express.json());
