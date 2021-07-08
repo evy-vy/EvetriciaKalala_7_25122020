@@ -1,6 +1,7 @@
 //App.js
 
 const express = require('express');
+const userRoutes = require('./routes/user');
 
 
 const app = express();
@@ -16,9 +17,8 @@ app.use((req, res, next) => {
 });
 
 
-//permet de lire le corps de la requête d'un objet JSON entrant pour rendre l'objet utilisable.cette fonction est utilisé sur toutes les routes de l'API
-
 app.use(express.json());
 
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
