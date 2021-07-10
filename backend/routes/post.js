@@ -1,12 +1,13 @@
-//route user
+//route post
 
 const express = require('express');
 const router = express.Router();
-const userCtrl = require('../controllers/user');
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');
+const postCtrl = require('../controllers/post');
 
 
-router.post('/', auth, multer, postCtrl.createPost);
+router.post('/', multer, postCtrl.createPost);
 // router.post('/:id/like', auth, postCtrl.likeOrDislikePost);
 // router.delete('/:id', auth, postCtrl.deletePost);
 // router.put('/:id', auth, multer, postCtrl.modifyPost);

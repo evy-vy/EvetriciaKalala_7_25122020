@@ -18,13 +18,15 @@ module.exports = {
       },
       title: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        notEmpty: true
       },
       content: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        notEmpty: true
       },
-      attachement: {
+      imageUrl: {
         allowNull: true,
         type: Sequelize.STRING
       },

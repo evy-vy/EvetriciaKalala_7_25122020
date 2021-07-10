@@ -63,12 +63,11 @@ exports.signup = async (req, res, next) => {
         if (!user) {
           bcrypt.hash(password, 10)
             .then(hash => {
-              /*const newUser (problème de déclaration qui n'est jamais réutilisé)*/
               const newUser = models.User.create({
                 username: username,
                 email: /*cryptoJs.AES.encrypt(email, key, { iv: iv }).toString()*/email,
                 password: hash,
-                isAdmin: 0
+                isAdmin: false
               })
                 .then(user => {
                   res.status(201).json({ message: ' new user created ! (userid : ' + user.id + ')' });
@@ -118,7 +117,7 @@ exports.login = (req, res, next) => {
                     isAdmin: user.isAdmin
                   },
                   process.env.TOKEN,
-                  { expiresIn: '10h' }
+                  { expiresIn: '24h' }
                 )
               })
             }
@@ -141,12 +140,9 @@ exports.getUserProfile = (req, res, next) => {
     where: { id: userId }
   })
     .then((user) => {
-      console.log(user);
       if (!user) {
-        console.log(user)
         return res.status(404).json({ message: "user not found", error });
       } else {
-        console.log('user3 :', user)
         res.status(200).json({ user })
       }
     })
@@ -156,9 +152,47 @@ exports.getUserProfile = (req, res, next) => {
 
 //delete user
 exports.deleteUser = (req, res, next) => {
-  models.User.destroy({
-    where: { id: req.params.id },
+
+  models.User.findOne({
+    where: { id: req.body.id }
   })
-    .then(() => res.status(200).json({ message: "Objet supprimé !" }))
-    .catch((err) => res.status(400).json({ err }));
+    .then(user => {
+      // //   console.log('tes1:', user.password);
+      // console.log('user password', user.password);
+      bcrypt.compare(req.body.password, user.password)
+
+        .then(valid => {
+          // console.log('coucou 2');
+          if (!valid) {
+            // console.log('pas pas ok')
+            res.status(400).json({ error, message: "wrong password !" });
+          } else {
+            // console.log('pass ok')
+            models.User.destroy({
+              where: { id: req.body.id }
+            })
+              .then(() => {
+                // console.log('test ici')
+                res.status(200).json(
+                  { message: 'logout successfully !' }
+                );
+              })
+              .catch(error => {
+                // console.log('error ', error);
+                res.status(500).json({ error });
+                // console.log('erreur a la suppression')
+              })
+          }
+        })
+        .catch(error => {
+
+          // console.log('pass control error: ', error)
+          res.status(500).json(error)
+        }
+        );
+    })
+    .catch(error => {
+      // console.log('mauvais mot de passe: ', error)
+      res.status(500).json({ error, message: 'erreur' })
+    });
 };
