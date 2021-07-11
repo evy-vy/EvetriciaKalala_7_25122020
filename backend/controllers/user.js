@@ -130,13 +130,14 @@ exports.login = (req, res, next) => {
   }
 };
 
+
 //renvoi l'utilisateur sélectionnée grace à son id
 
 exports.getUserProfile = (req, res, next) => {
 
   const userId = req.body.id;
   models.User.findOne({
-    // attributes: ['email', 'username'],
+    attributes: ['password', 'id'],
     where: { id: userId }
   })
     .then((user) => {
@@ -149,15 +150,61 @@ exports.getUserProfile = (req, res, next) => {
     .catch(error => res.status(404).json({ message: "user not found ", error }));
 };
 
+//update profile
+
+exports.updateUser = (req, res, next) => {
+  const id = req.body.id;
+  const newPassword = req.body.newPassword;
+  const password = req.body.password;
+  console.log('A:', newPassword);
+
+  if (checkPassword(newPassword)) {
+    models.User.findOne({
+      attributes: ['id', "password"],
+      where: { id: id }
+    })
+      .then((user) => {
+        console.log('oldPass:', password);
+        console.log('user:', user);
+        bcrypt.compare(newPassword, user.password);
+        console.log('newPwdCrypt:', newPassword);
+        if (!user) {
+          // console.log('C: Oups');
+          // res.status(406).json({ error: 'Vous avez entré le même mot de passe' })
+          bcrypt.hash(password, 10)
+            .then(hash => {
+              console.log('it looks like that:', newPassword);
+              models.User.update({
+                newPassword: hash,
+                password: newPassword,
+                where: { id: id }
+              })
+              console.log(newPassword)
+            })
+            .then(() => res.status(201).json({ confirmation: 'password updated' }))
+            .catch(err => res.status(500).json(err))
+        }
+      })
+  }
+}
+
 
 //delete user
+
+/*
+* requete (id, mdp);
+* On cherche l'utilisateur
+* on compare son mdp à celui passé dans la req
+* si ok => on recupère l'utilisateur a supp dans la table user
+* puis suppression. 
+*/
 exports.deleteUser = (req, res, next) => {
 
   models.User.findOne({
     where: { id: req.body.id }
   })
     .then(user => {
-      // //   console.log('tes1:', user.password);
+      // console.log('tes1:', user.password);
       // console.log('user password', user.password);
       bcrypt.compare(req.body.password, user.password)
 
@@ -174,13 +221,13 @@ exports.deleteUser = (req, res, next) => {
               .then(() => {
                 // console.log('test ici')
                 res.status(200).json(
-                  { message: 'logout successfully !' }
+                  { message: 'delete successfully !' }
                 );
               })
               .catch(error => {
                 // console.log('error ', error);
                 res.status(500).json({ error });
-                // console.log('erreur a la suppression')
+                console.log('erreur a la suppression')
               })
           }
         })
@@ -193,6 +240,6 @@ exports.deleteUser = (req, res, next) => {
     })
     .catch(error => {
       // console.log('mauvais mot de passe: ', error)
-      res.status(500).json({ error, message: 'erreur' })
+      res.status(500).json({ error })
     });
 };
