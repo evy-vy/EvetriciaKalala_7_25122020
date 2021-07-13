@@ -10,7 +10,7 @@ module.exports = ((req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
     const isAdmin = decodedToken.isAdmin;
-    if ((isAdmin) && req.body.userId && req.body.userId !== userId) {
+    if (isAdmin && req.body.userId && req.body.userId !== userId) {
       throw 'User ID non valable';
     } else {
       next();

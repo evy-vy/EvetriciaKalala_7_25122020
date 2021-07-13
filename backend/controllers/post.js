@@ -1,7 +1,6 @@
 const models = require('../models');
 const fs = require('fs');
-// const { JsonWebTokenError } = require('jsonwebtoken');
-const jwt = require('jsonwebtoken');
+
 
 const title_limit = 2;
 const content_limit = 4;
@@ -13,7 +12,7 @@ const content_limit = 4;
 
 exports.createPost = (req, res, next) => {
 
-  const id = req.body.id;
+  const userId = req.body.userId;
   const title = req.body.title;
   const content = req.body.content;
 
@@ -27,7 +26,7 @@ exports.createPost = (req, res, next) => {
 
   models.User.findOne({
     // attributes: ['email', 'username'],
-    where: { id: id }
+    where: { id: userId }
   })
     .then((user) => {
       // console.log('ahah');
@@ -47,7 +46,6 @@ exports.createPost = (req, res, next) => {
         models.Post.create({
           title: title,
           content: content,
-          likes: 0,
           UserId: user.id
         })
       };
@@ -64,21 +62,26 @@ exports.createPost = (req, res, next) => {
 
 //get all posts a revoir
 
-exports.getAllPost = (res, req, next) => {
-  console.log('coucou')
+exports.getAllPost = (req, res, next) => {
+  console.log('coucou');
   models.Post.findAll({
-    order: [['id', 'ASC']]
+    include: [{
+      model: models.User,
+      attributes: ['username']
+    }],
+    order: [['createdAt', 'DESC']]
   })
-    .then((posts) => {
-      console.log('youhouu');
-      if (posts) {
-        res.status(200).json(posts);
+    .then(posts => {
+      console.log(posts);
+      if (!posts) {
+        console.log('ici');
+        return res.status(404).json({ error: 'empty' })
       } else {
-        res.status(404).json({ message: 'not found' })
+        console.log('et la');
+        return res.status(200).json({ posts })
       }
     })
-    // .then((postList) => res.status(200).json({ message: postList }))
-    .catch(error => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error }))
 };
 
 // find one post
@@ -91,7 +94,7 @@ exports.getOnePost = (req, res, next) => {
     .then((post) => {
       console.log(id);
       if (post) {
-        res.status(200).json({ message: post })
+        res.status(201).json({ message: post })
       }
     })
     .catch(error => res.status(500).json({ error }))
@@ -127,8 +130,11 @@ exports.modifyPost = (req, res, post) => {
 
 //delete a retravailler (voir pour admin)
 exports.deletePost = (req, res, next) => {
-  const id = req.body.id;
-  // const isAdmin = decodedToken.isAdmin
+  const id = req.params.id;
+
+  //bouchon
+  const isAdmin = false; /* ex: localstorage.curentUser.isAdmin */
+  const currentUser = 1; /* ex: localstorage.curentUser.id */
 
   models.Post.destroy({
     where: { id: id }

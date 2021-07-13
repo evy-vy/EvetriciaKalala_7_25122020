@@ -35,6 +35,7 @@ exports.signup = async (req, res, next) => {
   const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
+  const isAdmin = req.body.isAdmin;
 
   if (email === null || username === null || password === null) {
     return res.status(400).json({ 'error': 'missing parameters' });
@@ -65,15 +66,16 @@ exports.signup = async (req, res, next) => {
             .then(hash => {
               const newUser = models.User.create({
                 username: username,
-                email: /*cryptoJs.AES.encrypt(email, key, { iv: iv }).toString()*/email,
+                email: cryptoJs.AES.encrypt(email, key, { iv: iv }).toString()/*email*/,
                 password: hash,
-                isAdmin: false
+                isAdmin: isAdmin
               })
                 .then(user => {
                   res.status(201).json({ message: ' new user created ! (userid : ' + user.id + ')' });
                 })
                 .catch(error => res.status(500).json({ message: "Probleme de compte", error: error }));
-            });
+            })
+            .catch(error => res.status(500).json({ message: "Probleme de compte", error: error }));
         } else {
           return res.status(409).json({ 'error': 'user already exist ' });
         }
@@ -87,18 +89,19 @@ exports.signup = async (req, res, next) => {
 //login
 
 exports.login = (req, res, next) => {
-
+  const email = req.body.email;
   const username = req.body.username;
   const password = req.body.password;
+  const encryptedEmail = cryptoJs.AES.encrypt(email, key, { iv: iv }).toString();
 
-  if (username === null || password === null) {
+  if (username === null || password === null || email === null) {
     return res.status(400).json({ 'error': 'missing parameters' });
   }
 
-  if (checkUsername(username) === true && checkPassword(password) === true) {
+  if (checkUsername(username) === true && checkMail(email) === true && checkPassword(password) === true) {
 
     models.User.findOne({
-      where: { username: username }
+      where: { username: username, email: encryptedEmail }
     })
       .then(user => {
         if (!user) {
@@ -109,18 +112,20 @@ exports.login = (req, res, next) => {
             if (!valid) {
               return res.status(401).json({ error: 'wrong password !' });
             } else {
+
+              // console.log('user: ', user)
               res.status(200).json({
                 userId: user.id,
                 token: jwt.sign(
                   {
                     userId: user.id,
-                    isAdmin: user.isAdmin
+                    // isAdmin: user.isAdmin
                   },
                   process.env.TOKEN,
                   { expiresIn: '24h' }
                 )
-              })
-            }
+              });
+            };
           })
           .catch(error => res.status(500).json({ error })); //erreur server
       })
@@ -137,7 +142,7 @@ exports.getUserProfile = (req, res, next) => {
 
   const userId = req.body.id;
   models.User.findOne({
-    attributes: ['password', 'id'],
+    attributes: ['id', 'username'],
     where: { id: userId }
   })
     .then((user) => {
@@ -150,7 +155,7 @@ exports.getUserProfile = (req, res, next) => {
     .catch(error => res.status(404).json({ message: "user not found ", error }));
 };
 
-//update profile
+// update profile
 
 exports.updateUser = (req, res, next) => {
   const id = req.body.id;
@@ -163,28 +168,47 @@ exports.updateUser = (req, res, next) => {
       attributes: ['id', "password"],
       where: { id: id }
     })
+
       .then((user) => {
-        console.log('oldPass:', password);
+        //       console.log('oldPass:', password);
         console.log('user:', user);
-        bcrypt.compare(newPassword, user.password);
-        console.log('newPwdCrypt:', newPassword);
-        if (!user) {
-          // console.log('C: Oups');
-          // res.status(406).json({ error: 'Vous avez entré le même mot de passe' })
-          bcrypt.hash(password, 10)
+        console.log('newPassword:', newPassword)
+        console.log('password:', password)
+        let samePassword = newPassword === password;
+        if (!samePassword) {
+
+          console.log('pas le meme mdp')
+          bcrypt.hash(newPassword, 10)
             .then(hash => {
-              console.log('it looks like that:', newPassword);
-              models.User.update({
-                newPassword: hash,
-                password: newPassword,
+              console.log('id: ', id)
+
+              let values = {
+                password: hash,
+                username: req.body.username,
+                isAdmin: req.body.isAdmin,
+
+              };
+
+              let condition = {
                 where: { id: id }
-              })
-              console.log(newPassword)
+              }
+
+              models.User.update(values, condition)
+                .then(result => {
+                  console.log('result')
+                  res.status(201).json({ message: ' data updated' })
+                })
+                .catch(error => res.status(500).json(error))
             })
-            .then(() => res.status(201).json({ confirmation: 'password updated' }))
-            .catch(err => res.status(500).json(err))
-        }
+          console.log('pass: ', newPassword)
+        } else {
+          console.log('meme mot de passe')
+        };
       })
+      .catch(error => res.status(500).json(error))
+  }
+  else {
+    console.log('password pas valid')
   }
 }
 
@@ -200,23 +224,23 @@ exports.updateUser = (req, res, next) => {
 */
 exports.deleteUser = (req, res, next) => {
 
+  console.log('id: ', req.params.id)
   models.User.findOne({
-    where: { id: req.body.id }
+    where: { id: req.params.id }
   })
     .then(user => {
-      // console.log('tes1:', user.password);
-      // console.log('user password', user.password);
+      console.log('tes1:', user.password);
       bcrypt.compare(req.body.password, user.password)
 
         .then(valid => {
-          // console.log('coucou 2');
+          console.log('coucou 2');
           if (!valid) {
-            // console.log('pas pas ok')
+            console.log('pas pas ok')
             res.status(400).json({ error, message: "wrong password !" });
           } else {
-            // console.log('pass ok')
+            console.log('pass ok')
             models.User.destroy({
-              where: { id: req.body.id }
+              where: { id: req.params.id }
             })
               .then(() => {
                 // console.log('test ici')
@@ -234,7 +258,7 @@ exports.deleteUser = (req, res, next) => {
         .catch(error => {
 
           // console.log('pass control error: ', error)
-          res.status(500).json(error)
+          // res.status(500).json(error)
         }
         );
     })

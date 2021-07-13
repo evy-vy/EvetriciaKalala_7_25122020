@@ -1,28 +1,32 @@
-//mise en place de associations 
-
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Likes', { //likes => nom du model 
+    await queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      postId: {
+      comment: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'posts',
-          key: 'id'
-        }
+        type: Sequelize.STRING,
+        notEmpty: true
       },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: "users",
+          model: 'users',
+          key: 'id'
+        }
+      },
+      postId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        onDelete: 'cascade',
+        references: {
+          model: 'Posts',
           key: 'id'
         }
       },
@@ -37,6 +41,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Likes');
+    await queryInterface.dropTable('Comments');
   }
 };
