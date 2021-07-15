@@ -1,0 +1,11 @@
+ul.footer {
+  margin-left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__container {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-top: 2px dotted lightgray;
+}

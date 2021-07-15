@@ -1,0 +1,65 @@
+
+.login__heading {
+  font-size: 1.2rem;
+  margin: 0px 0 5px 0;
+  color: $title-color;
+} 
+
+.login__span {
+  font-size: 0.9rem;
+  color: $subtitles-color;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+label {
+  color: $form-label;
+  margin-bottom: 10px;
+}
+
+.terms__container {
+  margin-top: 15px;
+  font-size: 0.8rem;
+}
+
+.terms {
+  color: #000;
+  & a {
+    color: $form-label;
+  }
+}
+
+.input__form {
+  padding: 15px 5px 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: currentcolor;
+}
+
+
+.form__rescue {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.signUp {
+  color: $title-color;
+  font-weight: bold;
+}
+
+.text-success {
+  color: $text-success;
+}
+
+.text-danger {
+  color: $text-danger;
+}

@@ -1,0 +1,164 @@
+html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, p {
+  font-family: "asap", "open-sans";
+}
+
+body {
+  max-width: 100%;
+  margin: 25px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+h1 {
+  font-family: "quicksand", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+button, input, select, textarea {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img, video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0;
+}
+
+td:not([align]), th:not([align]) {
+  text-align: left;
+}
+
+.header__logo {
+  width: 100%;
+  margin: -40px 0 -60px;
+}
+
+.login__heading {
+  font-size: 1.2rem;
+  margin: 0px 0 5px 0;
+  color: #35424a;
+}
+
+.login__span {
+  font-size: 0.9rem;
+  color: #989eb1;
+  padding-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+label {
+  color: #f85f6a;
+  margin-bottom: 10px;
+}
+
+.terms__container {
+  margin-top: 15px;
+  font-size: 0.8rem;
+}
+
+.terms {
+  color: #000;
+}
+.terms a {
+  color: #f85f6a;
+}
+
+.input__form {
+  padding: 15px 5px 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: currentcolor;
+}
+
+.form__rescue {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.signUp {
+  color: #35424a;
+  font-weight: bold;
+}
+
+.text-success {
+  color: #3ac93a;
+}
+
+.text-danger {
+  color: #f88918;
+}
+
+.check-btn {
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-color: #f85f6a;
+  border: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  color: #fff;
+}
+
+ul.footer {
+  margin-left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__container {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-top: 2px dotted lightgray;
+}
+
+/*# sourceMappingURL=style.css.map */
