@@ -80,7 +80,7 @@ exports.signup = async (req, res, next) => {
           return res.status(409).json({ 'error': 'user already exist ' });
         }
       })
-      .catch(error => res.status(500).json({ error, error: error })); //requête qui s'effectue mal, on envoi une erreur pour dire qu'on ne peut pas verif si l'utilisateur existe ou pas. 
+      .catch(error => res.status(500).json({ error })); //requête qui s'effectue mal, on envoi une erreur pour dire qu'on ne peut pas verif si l'utilisateur existe ou pas. 
   } else {
     res.status(500).json({ error: 'Error with provided informations' });
   }
@@ -141,10 +141,12 @@ exports.login = (req, res, next) => {
 
 exports.getUserProfile = (req, res, next) => {
 
-  const username = req.params.username;
+  // const username = req.params.username;
+  const id = req.params.id;
+
   models.User.findOne({
-    attributes: ['username'],
-    where: { username: username }
+    // attributes: ['username', 'email'],
+    where: { id: id }
   })
     .then((user) => {
       if (!user) {
