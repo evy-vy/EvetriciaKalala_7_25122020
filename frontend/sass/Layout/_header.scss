@@ -1,4 +1,36 @@
-.header__logo {
-  width: 100%;
-  margin: -40px 0 -60px;
+
+// .header {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .header__nav {
+//   display: flex;
+//     position: absolute;
+//     width: 100%;
+    
+// }
+
+.header__list {
+  display: flex;
+  justify-content: space-around;
 }
+
+.header__link--visited {
+  color: lightgray;
+}
+
+// .header_container {
+//   width: 100%;
+//   // display: flex;
+//   // justify-content: center;
+// }
+
+// .header__logo {
+//   width: 100%;
+//   // margin: -40px 0 -60px;
+//   display: flex;
+//   @include tablette {
+//     width: 60%;
+//   }
+// }

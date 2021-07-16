@@ -87,7 +87,7 @@ exports.getAllPost = (req, res, next) => {
 // find one post
 
 exports.getOnePost = (req, res, next) => {
-  const id = (req.body.id);
+  const id = (req.params.id);
   models.Post.findOne({
     where: { id: id }
   })
@@ -106,7 +106,7 @@ exports.getOnePost = (req, res, next) => {
 
 exports.modifyPost = (req, res, post) => {
 
-  const id = req.body.id;
+  const id = req.params.id;
   const title = req.body.title;
   const content = req.body.content
 

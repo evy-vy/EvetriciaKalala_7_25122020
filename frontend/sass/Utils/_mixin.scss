@@ -1,0 +1,7 @@
+/*****************Media Queries******************/
+
+@mixin tablette {
+  @media screen and (min-width: map-get($tab-breakpoints, tab-min)) { 
+    @content;
+  } 
+}

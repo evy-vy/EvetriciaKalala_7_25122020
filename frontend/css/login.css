@@ -64,9 +64,20 @@ td:not([align]), th:not([align]) {
   text-align: left;
 }
 
-.header__logo {
-  width: 100%;
-  margin: -40px 0 -60px;
+/*****************Media Queries******************/
+/*media tablette*/
+.header__list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.header__link--visited {
+  color: lightgray;
+}
+
+section.login__container {
+  display: flex;
+  flex-direction: column;
 }
 
 .login__heading {
@@ -152,13 +163,16 @@ label {
 ul.footer {
   margin-left: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .footer__container {
-  margin: 10px 0;
+  margin: 50px 0;
   padding: 10px 0;
   border-top: 2px dotted lightgray;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 /*# sourceMappingURL=login.css.map */

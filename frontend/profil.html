@@ -10,22 +10,29 @@
   <script
       src="https://kit.fontawesome.com/f97e8f3daf.js" crossorigin="anonymous" >
   </script>
-  <link rel="stylesheet" href="./css/login.css"/>
-  <title>Groupomania login</title>
+  <link rel="stylesheet" href="./css/profil.css"/>
+  <title>Groupomania me</title>
 </head>
   <body>
     <!--header-->
     <header class="header">
+      <nav class="header__nav">
+        <ul class = "header__list">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a class="header__link--visited" href="profile.html">Profil</a></li>
+            <li><a href="#" id="logout">Se déconnecter</a></li>
+        </ul>
       <div class="header_container">
         <img src="./images/icon-above-font.png" alt="Logo groupomania" class="header__logo"/>
       </div>
     </header>
     <!--main-->
     <main>
-      <section class="login__container">
-        <h1 class="login__heading">Login</h1>
-        <span class="login__span">Nous sommes heureux de vous revoir.</span>
-        <form methode="POST" action="js/login.js" class="form" id="connexion">
+      <section class="updateProfil__container">
+        <h1 class="profil__heading">Profil</h1>
+        <div id="profil__data">
+        </div>
+        <form methode="POST" action="js/profil.js" class="form" id="profil">
           <div class="form__container">
             <label for="username">Pseudo: </label>
             <input class="form-control input__form" type="texte" id="username" name="username" placeholder="Toto" minlengh="4" maxlenght="20" required>
@@ -33,29 +40,25 @@
           </div>
           <div class="form__container">
             <label for="password">Password: </label>
-            <input class="form-control input__form" type="password" id="password" name="password" minlength="8" placeholder= "Mot de passe" required>
+            <input class="form-control input__form" type="password" id="password" name="password" minlength="8"  placeholder = "Mot de passe" required>
             <small id="passwordWarning"></small>
           </div>
-          <button class= "check-btn" type="submit" value="login">Login</button>
+          <button class= "check-btn" type="submit" value="signup">Modifier</button>
         </form>
-        <div class="form__rescue">
-          <span class="login__span mdp">Mot de passe oublié?</span>
-          <a href="./index.html"class="signup">Sign up</a>
-        </div>
       </section>
     </main>
     <!--footer-->
     <footer class="footer__container">
       <ul class="footer">
         <li class= footer__link><a href="#">À propos</a></li>
-        <li class="list-inline-item">&middot;</li>
+        <li class="dot">&middot;</li>
         <li class= footer__link><a href="#">Besoin d'aide</a></li>
-        <li class="list-inline-item">&middot;</li>
+        <li class="dot">&middot;</li>
         <li class= footer__link><a href="mailto:support@groupomania.com">Support</a></li>
       </ul>
     </footer>
 
     <script src="./Js/api.js"></script>
-    <script src="./Js/login.js"></script>
+    <script src="./Js/profil.js"></script>
   </body>
 </html>

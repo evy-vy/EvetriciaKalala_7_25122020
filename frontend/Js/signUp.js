@@ -1,5 +1,7 @@
 /*******************************FORM***************************************/
 
+
+
 // const { allowedNodeEnvironmentFlags } = require("node:process");
 
 // récupération du formulaire
@@ -79,84 +81,72 @@ form.addEventListener('submit', (e) => {
 
 //Soumission du formulaire. On met l'écouteur d'évènement directement sur le form et on écoute l'évènement.
 const checkForSubmit = (form) => {
-  console.log('coucou');
+  // console.log('coucou');
   const fields = [
     {
       "type": "email",
-      "value": form.elements["element"].value,
+      "value": form.elements["email"].value,
     },
     {
       "type": "string",
-      "value": form.element["username"].value,
+      "value": form.elements["username"].value,
     },
 
     {
       "type": "password",
-      "value": form.element["password"].value
+      "value": form.elements["password"].value
     }
   ];
-  console.log('je suis la')
+  // console.log('je suis la')
   let isValid = false;
 
-  fields.forEach((item) => {
-    console.log('et la aussi');
+  fields.forEach((data) => {
+    // console.log('et la aussi');
     //on parcours notre tableaux de champs, et on execute notre fonction de vérification
-    isValid = verifInput(item["value"], item["type"]);
+    isValid = verifInput(data["value"], data["type"]);
     if (!isValid) { //si isValid est false on sort de la boucle
-      console.log('puis ici')
       return false
     }
   })
 
+  //si tous les champs sont bons isValid sera égal a true
   if (isValid) {
-    console.log('et meme la')
     sendData(form);
     alert("inscription ok");
   }
 
-
-  const sendData = () => {
+  function sendData() {
     const data = [];
 
     //récupère les valeurs entrées dans le formulaire et les formates
-    const formData = new FormData(document.getElementById('inscription'));
+    const formData = new FormData(document.getElementById("inscription"));
 
+    //me permet de creer une nouvelle ligne pour chaque clé et valeur du tableau
     formData.forEach(function (value, key) {
       data[key] = value;
     })
 
-    const datasList = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const datasInStorage = JSON.parse(localStorage.getItem(key));
-      datasList.push(datasInStorage.id);
+    const post = {
+      "username": data.username,
+      "email": data.email,
+      "password": data.password
     }
-
-    const userData = {
-      "user": {
-        "userName": data.userName,
-        "email": data.email,
-        "password": data.password
-      },
-      "users": datasList
-    }
-
     fetch(api("postUserSignUp"), {
-      method: "POST" ?
-        headers : {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-      body: JSON.stringify(userData)
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post)
     })
       .then(response => response.json())
-      .then(data => {
-        localStorage.setItem("userData", JSON.stringify(data));
-        window.location.href = "./frontend/login.html";
+      .then(() => {
+        window.location.href = "./login.html";
       })
       .catch(error => {
         alert(error)
       });
-  };
+  }
 };
+
 

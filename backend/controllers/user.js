@@ -68,7 +68,7 @@ exports.signup = async (req, res, next) => {
                 username: username,
                 email: cryptoJs.AES.encrypt(email, key, { iv: iv }).toString()/*email*/,
                 password: hash,
-                isAdmin: isAdmin
+                isAdmin: isAdmin || false
               })
                 .then(user => {
                   res.status(201).json({ message: ' new user created ! (userid : ' + user.id + ')' });
@@ -89,19 +89,20 @@ exports.signup = async (req, res, next) => {
 //login
 
 exports.login = (req, res, next) => {
-  const email = req.body.email;
+  // const email = req.body.email;
+  // const userId = req.params.id
   const username = req.body.username;
   const password = req.body.password;
-  const encryptedEmail = cryptoJs.AES.encrypt(email, key, { iv: iv }).toString();
+  // const encryptedEmail = cryptoJs.AES.encrypt(email, key, { iv: iv }).toString();
 
-  if (username === null || password === null || email === null) {
+  if (username === null || password === null /*|| email === null*/) {
     return res.status(400).json({ 'error': 'missing parameters' });
   }
 
-  if (checkUsername(username) === true && checkMail(email) === true && checkPassword(password) === true) {
+  if (checkUsername(username) === true /*&& checkMail(email) === true*/ && checkPassword(password) === true) {
 
     models.User.findOne({
-      where: { username: username, email: encryptedEmail }
+      where: { username: username/*, email: encryptedEmail*/ }
     })
       .then(user => {
         if (!user) {
@@ -140,10 +141,10 @@ exports.login = (req, res, next) => {
 
 exports.getUserProfile = (req, res, next) => {
 
-  const userId = req.body.id;
+  const username = req.params.username;
   models.User.findOne({
-    attributes: ['id', 'username'],
-    where: { id: userId }
+    attributes: ['username'],
+    where: { username: username }
   })
     .then((user) => {
       if (!user) {
@@ -158,7 +159,7 @@ exports.getUserProfile = (req, res, next) => {
 // update profile
 
 exports.updateUser = (req, res, next) => {
-  const id = req.body.id;
+  const id = req.params.id;
   const newPassword = req.body.newPassword;
   const password = req.body.password;
   console.log('A:', newPassword);
@@ -210,7 +211,8 @@ exports.updateUser = (req, res, next) => {
   else {
     console.log('password pas valid')
   }
-}
+};
+
 
 
 //delete user
