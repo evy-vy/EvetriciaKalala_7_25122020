@@ -10,21 +10,77 @@
   <script
       src="https://kit.fontawesome.com/f97e8f3daf.js" crossorigin="anonymous" >
   </script>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <title>Groupomania signup</title>
+  <link rel="stylesheet" href="./css/forum.css"/>
+  <title>Groupomania Forum</title>
 </head>
   <body>
-    <!--header-->
     <header class="header">
       <div class="header__container">
         <img src="./images/icon-above-font.png" alt="Logo groupomania" class="header__logo"/>
       </div>
     </header>
+    
+   
+      <div class="forum__container">
+       <nav class="sidebar">
+        <a href="./forum.html" class="sidebar nav active">
+          <i class="fas fa-comments"></i>
+            Actu
+        </a>
+        <a href="./profil.html" class="sidebar nav">
+          <i class="fas fa-user"></i>
+            Profil
+        </a>
+        <a href="./login.html" class = "sidebar nav">
+          <i class="fas fa-walking"></i>
+            Déconnexion
+        </a>
+       </nav>
     <!--main-->
-    <main>
-      <section class="login__container">
-        <h1 class="login__heading">Sign up</h1>
-        <form methode="POST" action="js/signUp.js" class="form" id="inscription">
+        <main class="main">
+          <article class="card">
+            <header class="card__header card__header--avatar">
+              <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
+              <div class="card__title">
+                Mon pseudo 
+              </div>
+              <div class="card__time">Il y à 10 minutes</div>
+            </header>
+            <div class="card__body">
+              <p>
+                <img src="./images/giphy.gif" alt="image publiée par l'utilisateur" class="card__fullWidth"/>
+              </p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem animi tempore quam quae corrupti eos, consequatur, molestias ullam culpa magni recusandae sunt quaerat autem, sed repellat id. Quaerat, molestiae itaque.</p>
+            </div>
+            <footer class="card__footer">
+              <div class="card__like">
+                <a href="#">
+                  120  
+                  <i class="far fa-thumbs-up"></i>
+                </a>
+              </div>
+              <div class="card__like">
+                <a>
+                  25  
+                  <i class="far fa-thumbs-down"></i>
+                </a>
+              </div>
+              <div class="card__comments">
+                <a>
+                  12  
+                  <i class="far fa-comment-alt"></i></div>
+                </a>
+            </footer>
+          </article>
+        </main>
+        <aside class="aside">
+          coucou
+        </aside>
+
+      </div>
+      <!-- <section class="login__container"> -->
+        <!-- <h1 class="login__heading">Sign up</h1> -->
+        <!-- <form methode="POST" action="js/signUp.js" class="form" id="inscription">
           <div class="form__container">
             <label for="username">Pseudo: </label>
             <input class="form-control input__form" type="texte" id="username" name="username" placeholder="Toto" minlengh="4" maxlenght="20" required>
@@ -50,7 +106,7 @@
           <span class="login__span mdp">Mot de passe oublié?</span>
           <a href="./login.html">Login</a>
         </div>
-      </section>
+      </section> -->
     </main>
     <!--footer-->
     <footer class="footer__container">
@@ -64,6 +120,6 @@
     </footer>
 
     <script src="./Js/api.js"></script>
-    <script src="./Js/signUp.js"></script>
+    <script src="./Js/forum.js"></script>
   </body>
 </html>

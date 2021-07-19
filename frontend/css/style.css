@@ -9,7 +9,8 @@ html, body, p {
 
 body {
   max-width: 100%;
-  margin: 25px;
+  margin: 10px 25px;
+  /*background: #f1f1f1*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,13 +67,42 @@ td:not([align]), th:not([align]) {
 
 /*****************Media Queries******************/
 /*media tablette*/
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header__container {
+  display: flex;
+  justify-content: center;
+}
+
+.header__logo {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  margin: 10px 5px 35px;
+}
+@media screen and (min-width: 576px) {
+  .header__logo {
+    width: 40%;
+  }
+}
+
 .header__list {
   display: flex;
   justify-content: space-around;
+  padding: 10px;
+  margin: 2px;
 }
 
 .header__link--visited {
   color: lightgray;
+}
+
+.fas {
+  font-size: 1.3rem;
 }
 
 section.login__container {

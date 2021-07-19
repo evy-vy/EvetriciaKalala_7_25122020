@@ -1,7 +1,43 @@
-.profil__img {
-  margin: 10px;
-  padding: 20px;
+.profil__container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.profil__heading {
+  font-size: 1.4rem;
+}
+
+#profil__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background: blue;
+  height: 265px;
+}
+
+.userImg {
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid #fd2d01;
+
+}
+
+#profil__data {
+  display: flex;
+  flex-direction: column;
+}
+
+.paragraphColor {
+  color: $form-label;
+}
+
+a:hover,
+a:active {
+   color: $form-label
 }
 

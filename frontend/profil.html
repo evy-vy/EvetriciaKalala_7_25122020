@@ -18,33 +18,48 @@
     <header class="header">
       <nav class="header__nav">
         <ul class = "header__list">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a class="header__link--visited" href="profile.html">Profil</a></li>
-            <li><a href="#" id="logout">Se déconnecter</a></li>
+            <li>
+              <a href="forum.html">
+                <i class="fas fa-comments"></i>
+              </a>
+            </li>
+            <li>
+              <a class="header__link--visited" href="profil.html">
+                <active>
+                  <i class="fas fa-user"></i>
+                </active>
+              </a>
+            </li>
+            <li>
+              <a href="login.html" id="logout">
+                <i class="fas fa-walking"></i>
+              </a>
+            </li>
         </ul>
-      <div class="header_container">
+      <div class="header__container">
         <img src="./images/icon-above-font.png" alt="Logo groupomania" class="header__logo"/>
       </div>
     </header>
     <!--main-->
     <main>
-      <section class="updateProfil__container">
-        <h1 class="profil__heading">Profil</h1>
+      <!-- <h1 class="profil__heading">Profil</h1> -->
+      <section class="profil__container">
+        <div id="profil__img">
+          <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class="userImg"/>
+        </div> 
         <div id="profil__data">
+          <p class="profil__username "><span class="paragraphColor">Pseudo :</span> Toto</p>
+          <p class="profil__email "><span class="paragraphColor">Email :</span> toto@test.fr</p>
+          <p class="profil__creation "><span class="paragraphColor">Date de création :</span> 16/07/2021</p>
         </div>
-        <form methode="POST" action="js/profil.js" class="form" id="profil">
-          <div class="form__container">
-            <label for="username">Pseudo: </label>
-            <input class="form-control input__form" type="texte" id="username" name="username" placeholder="Toto" minlengh="4" maxlenght="20" required>
-            <small id="usernameWarning"></small>
-          </div>
-          <div class="form__container">
-            <label for="password">Password: </label>
-            <input class="form-control input__form" type="password" id="password" name="password" minlength="8"  placeholder = "Mot de passe" required>
-            <small id="passwordWarning"></small>
-          </div>
-          <button class= "check-btn" type="submit" value="signup">Modifier</button>
-        </form>
+        <div class="user-settings">
+          <button class="btn--settings">
+            <i class="fas fa-user-cog color"></i>
+          </button>  
+          <button class="btn--settings">
+            <i class="fas fa-user-times color"></i>
+          </button>
+        </div>
       </section>
     </main>
     <!--footer-->
@@ -52,7 +67,7 @@
       <ul class="footer">
         <li class= footer__link><a href="#">À propos</a></li>
         <li class="dot">&middot;</li>
-        <li class= footer__link><a href="#">Besoin d'aide</a></li>
+        <li class= footer__link><a href="#">Mentions légales</a></li>
         <li class="dot">&middot;</li>
         <li class= footer__link><a href="mailto:support@groupomania.com">Support</a></li>
       </ul>

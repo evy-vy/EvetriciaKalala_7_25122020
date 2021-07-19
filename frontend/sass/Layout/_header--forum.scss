@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  // justify-content: center;
+  width: 100%;
+}
+
+.header__container {
+  display: flex;
+  width: 50%;
+}
+
+.header__logo {
+  width: 75%;
+  justify-content: center;
+  display: flex;
+  margin: 10px 5px 35px;
+}
+
+.topperNav {
+  display: flex;
+  width: 50%;
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+li {
+  display: flex;
+  align-items: center;
+}

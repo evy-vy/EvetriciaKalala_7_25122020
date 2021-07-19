@@ -46,7 +46,7 @@ const verifInput = (value, type, element) => {
     //   regExp = new RegExp('^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}');
     //   break;
     case 'string':
-      regExp = new RegExp("^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$");
+      regExp = new RegExp("^[0-9a-zA-Z-@_]{4,10}");
       break;
     case 'password':
       regExp = new RegExp('^[0-9a-zA-Z-+!*@%_]{8,15}');;
@@ -129,8 +129,7 @@ const checkForSubmit = (form) => {
       "token": data.token,
       "username": data.username,
       "email": data.email,
-      "password": data.password
-
+      "password": data.password,
     }
 
     fetch(api("postUserLogIn"), {
@@ -144,7 +143,7 @@ const checkForSubmit = (form) => {
       .then(response => response.json())
       .then(data => {
         localStorage.setItem("data_login", JSON.stringify(data));
-        window.location = "./profil.html";
+        window.location = "./forum.html";
       })
       .catch(error => {
         alert(error);

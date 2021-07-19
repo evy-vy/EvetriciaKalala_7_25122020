@@ -1,7 +1,5 @@
 /*******************************FORM***************************************/
 
-
-
 // const { allowedNodeEnvironmentFlags } = require("node:process");
 
 // récupération du formulaire
@@ -48,7 +46,7 @@ const verifInput = (value, type, element) => {
       regExp = new RegExp('^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}');
       break;
     case 'string':
-      regExp = new RegExp("^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$");
+      regExp = new RegExp("^[0-9a-zA-Z-@_]{4,10}");
       break;
     case 'password':
       regExp = new RegExp('^[0-9a-zA-Z-+!*@%_]{8,15}');;

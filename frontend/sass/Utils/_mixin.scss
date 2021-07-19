@@ -5,3 +5,9 @@
     @content;
   } 
 }
+
+@mixin big-tablette {
+  @media screen and (min-width: map-get($bigTab-breakpoints, tab-min)) { 
+    @content;
+  } 
+}

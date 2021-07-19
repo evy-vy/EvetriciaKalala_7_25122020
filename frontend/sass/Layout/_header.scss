@@ -1,8 +1,25 @@
 
-// .header {
-//   display: flex;
-//   justify-content: center;
-// }
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header__container {
+  display: flex;
+  justify-content: center;
+}
+
+.header__logo {
+  width: 50%;
+  // margin: -40px 0 -60px;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  margin: 10px 5px 35px;
+  @include tablette {
+    width: 40%;
+  }
+}
 
 // .header__nav {
 //   display: flex;
@@ -14,23 +31,15 @@
 .header__list {
   display: flex;
   justify-content: space-around;
+  padding: 10px;
+  margin: 2px;
 }
 
 .header__link--visited {
   color: lightgray;
 }
 
-// .header_container {
-//   width: 100%;
-//   // display: flex;
-//   // justify-content: center;
-// }
+.fas {
+  font-size: 1.3rem;
+}
 
-// .header__logo {
-//   width: 100%;
-//   // margin: -40px 0 -60px;
-//   display: flex;
-//   @include tablette {
-//     width: 60%;
-//   }
-// }

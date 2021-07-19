@@ -3,7 +3,7 @@ const api = (url) => {
   {
     postUserSignUp: "http://localhost:3000/api/auth/signup",
     postUserLogIn: "http://localhost:3000/api/auth/login",
-    getOneUser: "http://localhost:3000/api/auth/:id"
+    getOneUser: "http://localhost:3000/api/auth/"
 
   }
 
