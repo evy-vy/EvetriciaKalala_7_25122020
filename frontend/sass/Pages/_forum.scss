@@ -30,19 +30,24 @@ a:active {
 .sidebar {
   font-size: 14px;
   // flex-wrap: wrap;
-  flex-direction: column;
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-around;
   @include big-tablette {
-      width: 28%;
-      flex: none;
+      width: 15%;
+      display: flex;
+      justify-content: space-around;
   }
   // background: springgreen;
  
 }
 
 .sidebar a {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0.6em 0;
-  width: 50%;
+  width: 100%;
+
 }
 
 .fas,
@@ -54,6 +59,12 @@ a:active {
   height: 30px;
   opacity: 0.67;
   transition: opacity 0.3s;
+}
+
+.fas {
+  @include big-tablette{
+    font-size: 1.8rem
+  }
 }
 
 .main {
@@ -95,6 +106,9 @@ a:active {
     font-size: 18px;
     color: #000;
     margin: 5px 0;
+  }
+  &__text {
+    line-height: 1.2rem;
   }
   &__time {
     color: rgba(0, 0, 0, 0.38);

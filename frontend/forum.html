@@ -10,6 +10,12 @@
   <script
       src="https://kit.fontawesome.com/f97e8f3daf.js" crossorigin="anonymous" >
   </script>
+  <script>
+  if (!sessionStorage.user) {
+    window.location = "./login.html";
+  }
+
+  </script>
   <link rel="stylesheet" href="./css/forum.css"/>
   <title>Groupomania Forum</title>
 </head>
@@ -25,15 +31,15 @@
        <nav class="sidebar">
         <a href="./forum.html" class="sidebar nav active">
           <i class="fas fa-comments"></i>
-            Actu
+            <!-- Actu -->
         </a>
         <a href="./profil.html" class="sidebar nav">
           <i class="fas fa-user"></i>
-            Profil
+            <!-- Profil -->
         </a>
         <a href="./login.html" class = "sidebar nav">
           <i class="fas fa-walking"></i>
-            Déconnexion
+            <!-- Déconnexion -->
         </a>
        </nav>
     <!--main-->
@@ -50,7 +56,8 @@
               <p>
                 <img src="./images/giphy.gif" alt="image publiée par l'utilisateur" class="card__fullWidth"/>
               </p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem animi tempore quam quae corrupti eos, consequatur, molestias ullam culpa magni recusandae sunt quaerat autem, sed repellat id. Quaerat, molestiae itaque.</p>
+              <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
+              </p>
             </div>
             <footer class="card__footer">
               <div class="card__like">
@@ -78,35 +85,6 @@
         </aside>
 
       </div>
-      <!-- <section class="login__container"> -->
-        <!-- <h1 class="login__heading">Sign up</h1> -->
-        <!-- <form methode="POST" action="js/signUp.js" class="form" id="inscription">
-          <div class="form__container">
-            <label for="username">Pseudo: </label>
-            <input class="form-control input__form" type="texte" id="username" name="username" placeholder="Toto" minlengh="4" maxlenght="20" required>
-            <small id="usernameWarning"></small>
-          </div>
-          <div class="form__container">
-            <label for="email">Email: </label>
-            <input class="form-control input__form" type="email" id="email" name="email" placeholder="email@groupomania.com"  required>
-            <small id="emailWarning"></small>
-          </div>
-          <div class="form__container">
-            <label for="password">Password: </label>
-            <input class="form-control input__form" type="password" id="password" name="password" minlength="8"  placeholder = "Mot de passe" required>
-            <small id="passwordWarning"></small>
-          </div>
-          <button class= "check-btn" type="submit" value="signup">sign up</button>
-        </form>
-        <div class="terms__container">
-          <input class="form-control input__form" type="checkbox" id="terms" name="therms" checked>
-          <label class = terms for="terms">I agree to the <a class= "services" href="#">Terms of Services</a> and <a class= "service" href="#">Privacy Policy</a></label>
-        </div>
-        <div class="form__rescue">
-          <span class="login__span mdp">Mot de passe oublié?</span>
-          <a href="./login.html">Login</a>
-        </div>
-      </section> -->
     </main>
     <!--footer-->
     <footer class="footer__container">

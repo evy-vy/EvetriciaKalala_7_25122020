@@ -1,41 +1,249 @@
-// console.log(localStorage);
-// if (!localStorage.token) {
-//   window.location.href = "./login.html"
-// }
 
-fetch(api('getOneUser') + userId, {
-  method: "GET",
-  headers: {
-    Authorization: "Bearer" + localStorage.token,
-    Accept: 'application/json'
+if (!sessionStorage.user) {
+  window.location.href = "login.html";
+}
+
+
+//get one user
+function getValue() {
+  let result = JSON.parse(sessionStorage.getItem('user'));
+  let userId = result.userId;
+  console.log(result)
+  console.log(userId)
+  if (userId) {
+    return fetch(api('getOneUser') + userId, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + sessionStorage.token,
+        Accept: 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(error => {
+        alert(error);
+      });
+  } else {
+    alert("error")
+  };
+};
+
+async function userById() {
+  console.log('ici')
+  let userValues = await getValue();
+  console.log(userValues)
+  displayUserById(userValues);
+}
+
+// getValue()
+userById();
+
+function displayUserById(userValues) {
+  const username = document.createElement('p')
+  username.classList.add('profil__userame');
+  username.innerHTML = "<span class='paragraphColor'>Pseudo : </span>" + userValues.user.username;
+
+  const email = document.createElement('p')
+  email.classList.add('profil__email');
+  email.innerHTML = "<span class='paragraphColor'>Email : </span>" + userValues.user.email;
+
+  const isAdmin = document.createElement('p')
+  isAdmin.classList.add('profil__isAdmin');
+  isAdmin.innerHTML = "<span class='paragraphColor'>Admin : </span>" + userValues.user.isAdmin;
+
+  const createdAt = document.createElement('p')
+  createdAt.classList.add('profil__creation');
+  createdAt.innerHTML = "<span class='paragraphColor'>Date de creation : </span>" + userValues.user.createdAt.slice(2, 10);
+
+  const updatedAt = document.createElement('p')
+  updatedAt.classList.add('profil__update');
+  updatedAt.innerHTML = "<span class='paragraphColor'>Mis à jour : </span>" + userValues.user.updatedAt.slice(2, 10);
+
+  document.getElementById("profil__data").append(username, isAdmin, email, createdAt, updatedAt)
+}
+
+
+
+
+//gestion de la modification ou suppression de compte
+
+const toggleModify = document.getElementById("settings--btn");
+const toggleDelete = document.getElementById("delete--btn");
+const modify = document.getElementById('modify');
+const remove = document.getElementById('remove');
+
+toggleModify.addEventListener('click', () => {
+  if (getComputedStyle(modify).display == "none") {
+    modify.style.display = "block";
+  } else {
+    modify.style.display = "none";
   }
 })
-  .then((response => response.json())
-    .then(response => {
-      const username = response.username;
-      const profileCreation = response.createdAt;
-      const email = response.email;
-      const isAdmin = response.isAdmin;
-    })
-  )
-console.log(response, username)
-  .catch(error => {
-    console.log(error)
+
+toggleDelete.addEventListener('click', () => {
+  if (getComputedStyle(remove).display == "none") {
+    remove.style.display = "block";
+  } else {
+    remove.style.display = "none";
+  }
+})
+
+//Verification des données 
+
+const form = document.querySelector('#modifier');
+
+//On écoute les modifications apportées dans l'évenement que l'on cible (input username).
+
+form.newPassword.addEventListener('change', (e) => {
+  const element = document.getElementById('newPasswordWarning');
+  verifInput(e.target.value, 'password', element);
+});
+
+const verifInput = (value, type, element) => {
+  let regExp;
+
+  if (value.trim() === '') {
+    element.innerHTML = 'Données non valides';
+    element.classList.remove('text-success');
+    element.classList.add('text-danger');
+    return false;
+  }
+
+  switch (type) {
+    case 'password':
+      regExp = new RegExp('^[0-9a-zA-Z-+!*@%_]{8,15}');;
+      break;
+  }
+
+  if (regExp.test(value)) {
+    if (element != undefined) {
+      element.innerHTML = 'Données valides';
+      element.classList.remove('text-danger');
+      element.classList.add('text-success');
+    }
+    return true;
+  } else {
+    if (element != undefined) {
+      element.innerHTML = "Données non valides";
+      element.classList.remove("text-success");
+      element.classList.add("text-danger");
+    }
+    return false;
+  };
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  console.log('click')
+
+  checkForSubmit(e.target); // On envoi le form pour recupérer les champs 
+})
+
+const checkForSubmit = (form) => {
+  // console.log('coucou');
+  const fields = [
+    {
+      "type": "password",
+      "value": form.elements["password"].value
+    },
+    {
+      "type": "password",
+      "value": form.elements["newPassword"].value
+    }
+  ];
+  // console.log('je suis la')
+  let isValid = false;
+
+  fields.forEach((data) => {
+    // console.log('et la aussi');
+    //on parcours notre tableaux de champs, et on execute notre fonction de vérification
+    isValid = verifInput(data["value"], data["type"]);
+    if (!isValid) { //si isValid est false on sort de la boucle
+      return false
+    }
   })
-  .catch(error => res.status(200).json(error))
+
+  //si tous les champs sont bons isValid sera égal a true
+  if (isValid) {
+    // sendData(form);
+
+    console.log('isValid')
+    // alert("modifications ok");
+    // function modifyData() {
+    let result = JSON.parse(sessionStorage.getItem('user'));
+    let userId = result.userId;
+    console.log(result)
+    console.log(userId)
+
+    if (userId) {
+      fetch(api('getOneUser') + userId, {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + result.token,
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: form.elements["password"].value,
+          newPassword: form.elements["newPassword"].value
+        })
+      })
+        .then(response => {
+          return response.json
+        })
+        .catch(error => {
+          alert(error)
+        });
+    } else {
+      alert("error");
+    }
+    // }
+  };
+};
+
+async function updatePassword() {
+  // let newPassword = await modifyData();
+  // console.log(newPassword.json())
+}
+
+updatePassword()
 
 
+const deleteBtn = document.getElementById('deleteUser');
+const deletePassword = document.getElementById('deletPassword');
 
-// document.getElementById("profil__data").append(profileUsername)
-// const profileUsername = document.createElement('p');
-// profileUsername.classList.add('profil__username');
-// profileUsername.innerText = "Pseudo :" + username;
-// profileUsername.innerText = "Date d'inscription :" + profileCreation;
-// dataProfile.append(profileUsername);
+deleteBtn.addEventListener('click', function (e) {
 
-// .then(response => {
-//   const username = response.data_login.username;
-//   const profileCreation = response.data_login.createdAt;
-//   const email = response.data_login.email;
-//   const isAdmin = response.data_login.isAdmin;
-// })
+  let password = deletePassword.value;
+
+  deleteUser(password);
+
+});
+
+async function deleteUser(password) {
+  console.log('ici')
+  let userValues = await getValue();
+  console.log('val:', userValues)
+
+  fetch(api('getOneUser') + userValues.user.id, {
+    method: "DELETE",
+    headers: {
+
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      password: password,
+    })
+  })
+    .then(result => {
+      console.log('result: ', result)
+    })
+    .catch(error => {
+      alert(error)
+    });
+
+}

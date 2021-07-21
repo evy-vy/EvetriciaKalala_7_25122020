@@ -18,12 +18,6 @@ form.password.addEventListener('change', (e) => {
   verifInput(e.target.value, 'password', element);
 });
 
-// form.email.addEventListener('change', (e) => {
-
-//   const element = document.getElementById('emailWarning');
-//   verifInput(e.target.value, 'email', element);
-// });
-
 
 /************************** Validation FORM******************************/
 /*fonction qui me permet de vérifier le type de la valeur saisie dans les champs selon que ce soit un email, un string ou une adresse par rapport à la regExp qui lui est attribué. 
@@ -42,9 +36,7 @@ const verifInput = (value, type, element) => {
   }
 
   switch (type) {
-    // case 'email':
-    //   regExp = new RegExp('^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}');
-    //   break;
+
     case 'string':
       regExp = new RegExp("^[0-9a-zA-Z-@_]{4,10}");
       break;
@@ -73,18 +65,15 @@ const verifInput = (value, type, element) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   e.stopPropagation();
-
+  console.log('ici 1')
   checkForSubmit(e.target); // On envoi le form pour recupérer les champs 
 })
 
 //Soumission du formulaire. On met l'écouteur d'évènement directement sur le form et on écoute l'évènement.
 const checkForSubmit = (form) => {
-  // console.log('coucou');
+  console.log('ici 2')
   const fields = [
-    // {
-    //   "type": "email",
-    //   "value": form.elements["email"].value,
-    // },
+
     {
       "type": "string",
       "value": form.elements["username"].value,
@@ -95,11 +84,11 @@ const checkForSubmit = (form) => {
       "value": form.elements["password"].value
     }
   ];
-  // console.log('je suis la')
+
   let isValid = false;
 
   fields.forEach((data) => {
-    // console.log('et la aussi');
+
     //on parcours notre tableaux de champs, et on execute notre fonction de vérification
     isValid = verifInput(data["value"], data["type"]);
     if (!isValid) { //si isValid est false on sort de la boucle
@@ -109,14 +98,14 @@ const checkForSubmit = (form) => {
 
   //si tous les champs sont bons isValid sera égal a true
   if (isValid) {
+    console.log('ici 3')
     sendData(form);
     alert('datas ok')
-
   }
 
   function sendData() {
     const data = [];
-
+    console.log('ici 4')
     //récupère les valeurs entrées dans le formulaire et les formates
     const formData = new FormData(document.getElementById("connexion"));
 
@@ -125,12 +114,14 @@ const checkForSubmit = (form) => {
       data[key] = value;
     })
 
-    const post = {
+    const user = {
       "token": data.token,
+      "userId": data.userId,
       "username": data.username,
       "email": data.email,
-      "password": data.password,
+      "password": data.password
     }
+    console.log('user: ', user);
 
     fetch(api("postUserLogIn"), {
       method: "POST",
@@ -138,12 +129,22 @@ const checkForSubmit = (form) => {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post)
+      body: JSON.stringify(user)
     })
       .then(response => response.json())
       .then(data => {
-        localStorage.setItem("data_login", JSON.stringify(data));
-        window.location = "./forum.html";
+        if (data.userId) {
+          sessionStorage.setItem("user", JSON.stringify(data));
+          window.location = "./forum.html";
+        } else {
+          const loginError = document.getElementById("login-error");
+          loginError.innerText = data.error;
+          return false
+        }
+
+
+        console.log('data: ', data)
+
       })
       .catch(error => {
         alert(error);

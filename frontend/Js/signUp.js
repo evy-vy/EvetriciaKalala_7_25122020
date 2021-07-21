@@ -1,13 +1,11 @@
 /*******************************FORM***************************************/
 
-// const { allowedNodeEnvironmentFlags } = require("node:process");
-
 // récupération du formulaire
 const form = document.querySelector('#inscription');
 
 //On écoute les modifications apportées dans l'évenement que l'on cible (input username).
 form.username.addEventListener('change', (e) => {
-  //je récupère la balise qui me permettra de transmettre un message au client selon que la valeur saisie dans l'evenement cible est bon ou mauvais en fonction du type que l'on attend.
+
   const element = document.getElementById('usernameWarning');
   verifInput(e.target.value, 'string', element);
 });

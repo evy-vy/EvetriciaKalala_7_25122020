@@ -30,6 +30,7 @@
 #profil__data {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .paragraphColor {
@@ -39,5 +40,10 @@
 a:hover,
 a:active {
    color: $form-label
+}
+
+#modify, 
+#remove {
+  display: none;
 }
 

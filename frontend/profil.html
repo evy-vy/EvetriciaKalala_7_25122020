@@ -41,27 +41,56 @@
       </div>
     </header>
     <!--main-->
-    <main>
-      <!-- <h1 class="profil__heading">Profil</h1> -->
-      <section class="profil__container">
-        <div id="profil__img">
-          <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class="userImg"/>
-        </div> 
-        <div id="profil__data">
-          <p class="profil__username "><span class="paragraphColor">Pseudo :</span> Toto</p>
-          <p class="profil__email "><span class="paragraphColor">Email :</span> toto@test.fr</p>
-          <p class="profil__creation "><span class="paragraphColor">Date de création :</span> 16/07/2021</p>
+    <div class="main container">
+      <main>
+        <!-- <h1 class="profil__heading">Profil</h1> -->
+        <section class="profil__container">
+          <div id="profil__img">
+            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class="userImg"/>
+          </div> 
+          <div id="profil__data">
+            
+          </div>
+          <div class ="user-settings">
+            <button id="settings--btn">
+              <i class="fas fa-user-cog color"></i>
+            </button>  
+            <button id="delete--btn">
+              <i class="fas fa-user-times color"></i>
+            </button>
+          </div>
+        </section>
+        <div id="modify">
+          <form methode="POST" action="js/profil.js" class="form" id="modifier">
+            <div class="form__container">
+              <label for="password">Mot de passe actuel : </label>
+              <input class="form-control input__form" type="password" id="password" name="password" minlength="8" placeholder= "Mot de passe" required>
+              <small id="p
+              passwordWarning"></small>
+            </div>
+            <div class="form__container">
+              <label for="newPassword">Nouveau mot de passe: </label>
+              <input class="form-control input__form" type="password" id="modifyPassword" name="newPassword" minlength="8" placeholder= "Mot de passe" required>
+              <small id="p
+              newPasswordWarning"></small>
+            </div>
+            <!-- //TODO ajouter le message retour du back -->
+            <button class= "check-btn" type="submit" value="Modifier">Modifier</button>
+          </form>
         </div>
-        <div class="user-settings">
-          <button class="btn--settings">
-            <i class="fas fa-user-cog color"></i>
-          </button>  
-          <button class="btn--settings">
-            <i class="fas fa-user-times color"></i>
-          </button>
+        <div id="remove">
+          <!-- <form methode="POST" action="js/profil.js" class="form" id="supprimer"> -->
+            <div class="form__container">
+              <label for="password">Password: </label>
+              <input class="form-control input__form" type="password" id="deletPassword" name="password" minlength="8" placeholder= "Mot de passe" required>
+              <small id="passwordWarning"></small>
+            </div>
+            <!-- <button id="deleteUser" class= "check-btn" type="submit" value="Modifier">Supprimer</button> -->
+            <button id="deleteUser" class= "check-btn" value="Modifier">Supprimer</button>
+          <!-- </form> -->
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
     <!--footer-->
     <footer class="footer__container">
       <ul class="footer">

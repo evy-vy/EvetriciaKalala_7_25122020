@@ -132,19 +132,22 @@ a:active {
 
 .sidebar {
   font-size: 14px;
-  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
 }
 @media screen and (min-width: 850px) {
   .sidebar {
-    width: 28%;
-    flex: none;
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
   }
 }
 
 .sidebar a {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0.6em 0;
-  width: 50%;
+  width: 100%;
 }
 
 .fas,
@@ -155,6 +158,12 @@ a:active {
   height: 30px;
   opacity: 0.67;
   transition: opacity 0.3s;
+}
+
+@media screen and (min-width: 850px) {
+  .fas {
+    font-size: 1.8rem;
+  }
 }
 
 @media screen and (min-width: 850px) {
@@ -197,6 +206,9 @@ a:active {
   font-size: 18px;
   color: #000;
   margin: 5px 0;
+}
+.card__text {
+  line-height: 1.2rem;
 }
 .card__time {
   color: rgba(0, 0, 0, 0.38);
