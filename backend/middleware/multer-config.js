@@ -6,9 +6,10 @@ const multer = require('multer');
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
-  'image/jpeg': 'jpg',
+  'image/jpeg': 'jpeg',
   'image/png': 'png',
-  'image/webp': 'webp'
+  'image/webp': 'webp',
+  'image/gif': 'gif',
 };
 
 //storage permet de préciser dans quel dossier les fichiers doivent être enregistrés(le fichier images)

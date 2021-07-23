@@ -14,78 +14,256 @@
   if (!sessionStorage.user) {
     window.location = "./login.html";
   }
-
   </script>
   <link rel="stylesheet" href="./css/forum.css"/>
   <title>Groupomania Forum</title>
 </head>
   <body>
+   
+
     <header class="header">
       <div class="header__container">
         <img src="./images/icon-above-font.png" alt="Logo groupomania" class="header__logo"/>
-      </div>
+      </div> 
     </header>
-    
-   
-      <div class="forum__container">
-       <nav class="sidebar">
-        <a href="./forum.html" class="sidebar nav active">
-          <i class="fas fa-comments"></i>
-            <!-- Actu -->
-        </a>
-        <a href="./profil.html" class="sidebar nav">
-          <i class="fas fa-user"></i>
-            <!-- Profil -->
-        </a>
-        <a href="./login.html" class = "sidebar nav">
-          <i class="fas fa-walking"></i>
-            <!-- Déconnexion -->
-        </a>
-       </nav>
-    <!--main-->
-        <main class="main">
-          <article class="card">
-            <header class="card__header card__header--avatar">
-              <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
-              <div class="card__title">
-                Mon pseudo 
-              </div>
-              <div class="card__time">Il y à 10 minutes</div>
-            </header>
-            <div class="card__body">
-              <p>
-                <img src="./images/giphy.gif" alt="image publiée par l'utilisateur" class="card__fullWidth"/>
-              </p>
-              <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
-              </p>
-            </div>
-            <footer class="card__footer">
-              <div class="card__like">
-                <a href="#">
-                  120  
-                  <i class="far fa-thumbs-up"></i>
-                </a>
-              </div>
-              <div class="card__like">
-                <a>
-                  25  
-                  <i class="far fa-thumbs-down"></i>
-                </a>
-              </div>
-              <div class="card__comments">
-                <a>
-                  12  
-                  <i class="far fa-comment-alt"></i></div>
-                </a>
-            </footer>
-          </article>
-        </main>
-        <aside class="aside">
-          coucou
-        </aside>
+    <div class="forum__container">
 
+      <nav class="sidebar">
+        <!-- <ul class = "header__list"> -->
+          <li>
+            <a  href="forum.html" id="add__commentaire" class="sidebar nav active">
+              <i class="fas fa-comments"></i>
+            </a>
+          </li>
+          <li>
+            <a href="profil.html" class="sidebar nav">
+              <i class="fas fa-user"></i>
+            </a>
+          </li>
+          <li id="logout">
+            <a href="#" class= "sidebar nav">
+              <i class="fas fa-walking"></i>
+            </a>
+          </li>
+        <!-- </ul> -->
+      </nav>
+      <section class='post__container'>
+        <form methode="POST" action="#" class="form" id="post">
+        <div class="form__container">   
+          <label for="title">Titre*</label>
+          <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
+        </div>
+        <div class="form__container">
+          <label for="content">Message*</label>
+          <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows= "10" cols="30" required ></textarea>
+          <small id="contentWarning"></small>
+        </div>
+        <button id="send-post-btn" class= "check-btn" type="submit" value="envoyer">Envoyer</button>
+      </form>
+      </section>
+      <main class="main">
+        <article class="card">
+          <header class="card__header card__header--avatar">
+            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
+            <div class="card__title">
+              Mon pseudo 
+            </div>
+            <div class="card__time">Il y à 10 minutes</div>
+          </header>
+          <div class="card__body">
+            <p>
+              <img src="./images/giphy.gif" alt="image publiée par l'utilisateur" class="card__fullWidth"/>
+            </p>
+            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
+            </p>
+          </div>
+          <footer class="card__footer">
+            <div class="card__like">
+              <a href="#">
+                120  
+                <i class="far fa-thumbs-up"></i>
+              </a>
+            </div>
+            <div class="card__like">
+              <a>
+                25  
+                <i class="far fa-thumbs-down"></i>
+              </a>
+            </div>
+            <div class="card__comments">
+              <a>
+                12  
+                <i class="far fa-comment-alt"></i></div>
+              </a>
+          </footer>
+          <ul> 
+            <li class="comment">
+              <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit! Quae, non. Autem expedita, velit commodi aliquam dolore quisquam a impedit possimus accusamus?</p>
+            </li>
+          </ul>
+        </article>
+        <article class="card">
+          <header class="card__header card__header--avatar">
+            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
+            <div class="card__title">
+              Mon pseudo 
+            </div>
+            <div class="card__time">Il y à 10 minutes</div>
+          </header>
+          <div class="card__body">
+            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
+            </p>
+          </div>
+          <footer class="card__footer">
+            <div class="card__like">
+              <a href="#">
+                120  
+                <i class="far fa-thumbs-up"></i>
+              </a>
+            </div>
+            <div class="card__like">
+              <a>
+                25  
+                <i class="far fa-thumbs-down"></i>
+              </a>
+            </div>
+            <div class="card__comments">
+              <a>
+                12  
+                <i class="far fa-comment-alt"></i></div>
+              </a>
+          </footer>
+          <ul> 
+            <li class="comment">
+              <p class="usersComments">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+            </li>
+          </ul>
+        </article>
+        <article class="card">
+          <header class="card__header">
+            <div class="card__title">
+              Mon pseudo 
+            </div>
+            <div class="card__time">Il y à 10 minutes</div>
+          </header>
+          <div class="card__body">
+            <p class="card__text">Lorem ipsum dolor sit amet..
+            </p>
+          </div>
+          <footer class="card__footer">
+            <div class="card__like">
+              <a href="#">
+                120  
+                <i class="far fa-thumbs-up"></i>
+              </a>
+            </div>
+            <div class="card__like">
+              <a>
+                25  
+                <i class="far fa-thumbs-down"></i>
+              </a>
+            </div>
+            <div class="card__comments">
+              <a>
+                12  
+                <i class="far fa-comment-alt"></i></div>
+              </a>
+          </footer>
+          <ul> 
+            <li class="comment">
+              <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit!</p>
+            </li>
+          </ul>
+        </article>
+      </main>
+      <aside class="aside profil">
+        <article class="aside__card">
+          <header class="card__header">
+            <span class="new">new</span>
+            <div class="card__title">
+              Groupo News !
+            </div>
+            <div class="card__time">Il y à 1 minutes</div>
+          </header>
+          <div class="card__body">
+            <p class="card__text">Lorem ipsum dolor sit amet... 
+            </p>
+          </div>
+      <!-- </aside> -->
+      <span class="sidebar__title">Suggestion</span>
+      <div class="friends__list">
+        <div class="friend">
+          <img class="friend__avatar" src="
+            https://via.placeholder.com/73x73" alt="avatar">
+          <div class="friends-body">
+            <a class="friend__name" href="#">John Doe</a>
+              <span class="friend__connexion">gpm DRH</span>
+            <a class="friend__add" href="#"> 
+              <i class="fas fa-user-plus"></i>
+              Ajouter en ami
+            </a>
+          </div>    
+        </div>
       </div>
+      <div class="friends__list">
+        <div class="friend">
+          <img class="friend__avatar" src="
+            https://via.placeholder.com/73x73" alt="avatar">
+          <div class="friends-body">
+            <a class="friend__name" href="#">John Doe</a>
+              <span class="friend__connexion">gpm DRH</span>
+            <a class="friend__add" href="#"> 
+              <i class="fas fa-user-plus"></i>
+              Ajouter en ami
+            </a>
+          </div>    
+        </div>
+      </div>  
+      <div class="friends__list">
+        <div class="friend">
+          <img class="friend__avatar" src="
+            https://via.placeholder.com/73x73" alt="avatar">
+          <div class="friends-body">
+            <a class="friend__name" href="#">John Doe</a>
+              <span class="friend__connexion">gpm DRH</span>
+            <a class="friend__add" href="#"> 
+              <i class="fas fa-user-plus"></i>
+              Ajouter en ami
+            </a>
+          </div>    
+        </div>
+      </div>  
+      <div class="friends__list">
+        <div class="friend">
+          <img class="friend__avatar" src="
+            https://via.placeholder.com/73x73" alt="avatar">
+          <div class="friends-body">
+            <a class="friend__name" href="#">John Doe</a>
+              <span class="friend__connexion">gpm DRH</span>
+            <a class="friend__add" href="#"> 
+              <i class="fas fa-user-plus"></i>
+              Ajouter en ami
+            </a>
+          </div>    
+        </div>
+      </div>  
+      <div class="friends__list">
+        <div class="friend">
+          <img class="friend__avatar" src="
+            https://via.placeholder.com/73x73" alt="avatar">
+          <div class="friends-body">
+            <a class="friend__name" href="#">John Doe</a>
+              <span class="friend__connexion">gpm DRH</span>
+            <a class="friend__add" href="#"> 
+              <i class="fas fa-user-plus"></i>
+              Ajouter en ami
+            </a>
+          </div>    
+        </div>
+      </div>
+    </aside>
     </main>
+    </div>
     <!--footer-->
     <footer class="footer__container">
       <ul class="footer">

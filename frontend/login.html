@@ -21,30 +21,33 @@
       </div>
     </header>
     <!--main-->
-    <main>
-      <section class="login__container">
-        <h1 class="login__heading">Login</h1>
-        <span class="login__span">Nous sommes heureux de vous revoir.</span>
-        <span id="login-error"></span>
-        <form methode="POST" action="js/login.js" class="form" id="connexion">
-          <div class="form__container">
-            <label for="username">Pseudo: </label>
-            <input class="form-control input__form" type="texte" id="username" name="username" placeholder="Toto" minlengh="4" maxlenght="20" required>
-            <small id="usernameWarning"></small>
+    <div class="main__container">
+     <main>
+        <section class="login__container">
+          <h1 class="login__heading">Login</h1>
+          <span class="login__span">Nous sommes heureux de vous revoir.</span>
+          <span id="login-error"></span>
+          <form methode="POST" action="js/login.js" class="form" id="connexion">
+            <div class="form__container">
+              <label for="username">Pseudo: </label>
+              <input class="form-control input__form" type="texte" id="username" name="username" placeholder="Toto" minlengh="4" maxlenght="20" required>
+              <small id="usernameWarning"></small>
+            </div>
+            <div class="form__container">
+              <label for="password">Password: </label>
+              <input class="form-control input__form" type="password" id="password" name="password" minlength="8" placeholder= "Mot de passe" required>
+              <small id="passwordWarning"></small>
+            </div>
+            <button class= "check-btn" type="submit" value="login">Login</button>
+          </form>
+          <div class="form__rescue">
+            <span class="login__span mdp">Mot de passe oublié?</span>
+            <a href="./index.html"class="signup">Sign up</a>
           </div>
-          <div class="form__container">
-            <label for="password">Password: </label>
-            <input class="form-control input__form" type="password" id="password" name="password" minlength="8" placeholder= "Mot de passe" required>
-            <small id="passwordWarning"></small>
-          </div>
-          <button class= "check-btn" type="submit" value="login">Login</button>
-        </form>
-        <div class="form__rescue">
-          <span class="login__span mdp">Mot de passe oublié?</span>
-          <a href="./index.html"class="signup">Sign up</a>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
+    
     <!--footer-->
     <footer class="footer__container">
       <ul class="footer">

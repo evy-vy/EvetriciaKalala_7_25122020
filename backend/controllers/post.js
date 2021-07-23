@@ -12,9 +12,18 @@ const content_limit = 4;
 
 exports.createPost = (req, res, next) => {
 
+
   const userId = req.body.userId;
   const title = req.body.title;
   const content = req.body.content;
+  const image = req.file;
+
+  console.log('userId: ', userId)
+  console.log('title: ', title)
+  console.log('content: ', content)
+  // console.log('image: ', image)
+  // console.log('body: ', req.body)
+
 
   if (title.lenght === null && content.lenght === null) { //.trim à mettre en place pour éviter les espaces et les tab
     return res.status(400).json({ error, message: "please, fill in the blanks ! " });
@@ -36,17 +45,19 @@ exports.createPost = (req, res, next) => {
       }
       // console.log(user);
       if (req.file) {
+        console.log('file ok')
         models.Post.create({
           title: title,
           content: content,
-          imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+          imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
           UserId: user.id
         })
       } else {
+        console.log('file pas ok')
         models.Post.create({
           title: title,
           content: content,
-          UserId: user.id
+          UserId: user.id,
         })
       };
       // console.log('123');
@@ -87,14 +98,19 @@ exports.getAllPost = (req, res, next) => {
 // find one post
 
 exports.getOnePost = (req, res, next) => {
-  const id = (req.params.id);
+  const id = req.params.id;
   models.Post.findOne({
     where: { id: id }
   })
     .then((post) => {
       console.log(id);
+      console.log('post: ', post)
       if (post) {
         res.status(201).json({ message: post })
+        // res.render('test', { message: post })
+      }
+      else {
+        //pas de de post trouver -> rediriger vers le forum
       }
     })
     .catch(error => res.status(500).json({ error }))

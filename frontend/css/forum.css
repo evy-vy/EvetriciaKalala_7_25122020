@@ -3,6 +3,10 @@ html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, tex
   padding: 0;
 }
 
+li {
+  list-style-type: none;
+}
+
 html, body, p {
   font-family: "asap", "open-sans";
 }
@@ -67,32 +71,22 @@ td:not([align]), th:not([align]) {
 
 /*****************Media Queries******************/
 /*media tablette*/
-.header {
-  display: flex;
-  justify-content: center;
-}
-
 .header__container {
   display: flex;
   justify-content: center;
 }
 
 .header__logo {
-  width: 50%;
+  width: 160px;
   display: flex;
   justify-content: center;
   display: flex;
   margin: 10px 5px 35px;
 }
-@media screen and (min-width: 576px) {
-  .header__logo {
-    width: 40%;
-  }
-}
 
 .header__list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 10px;
   margin: 2px;
 }
@@ -132,14 +126,17 @@ a:active {
 
 .sidebar {
   font-size: 14px;
+  flex-wrap: wrap;
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
 }
 @media screen and (min-width: 850px) {
   .sidebar {
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
   }
 }
 
@@ -180,9 +177,18 @@ a:active {
   }
 }
 
+.profil {
+  display: none;
+}
+@media screen and (min-width: 576px) {
+  .profil {
+    display: block;
+  }
+}
+
 .card {
   border: dotted 5px rgba(255, 150, 157, 0.25);
-  border-radius: 3px;
+  border-radius: 6px;
   margin-bottom: 15px;
 }
 .card__header {
@@ -219,9 +225,99 @@ a:active {
 }
 .card__footer {
   border-top: dotted 5px rgba(255, 150, 157, 0.25);
+  border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
   display: flex;
   padding: 10px;
   font-size: 14px;
+}
+
+.aside__card {
+  margin-bottom: 30px;
+}
+.aside__card__header {
+  padding: 10px;
+}
+.aside__card__header--avatar {
+  position: relative;
+  padding-left: 65px;
+}
+.aside__card__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+.aside__card__title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+  margin: 5px 0;
+}
+.aside__card__text {
+  line-height: 1.2rem;
+}
+.aside__card__time {
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 12px;
+}
+.aside__card__body {
+  padding: 0 10px 10px 10px;
+}
+
+.new {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar__title {
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sidebar__title::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  background: #000;
+}
+
+.friend {
+  margin: 14px, 0;
+  display: flex;
+}
+.friend__avatar {
+  width: 73px;
+  height: 73px;
+  flex: none;
+  margin-right: 10px;
+}
+.friend__name {
+  display: block;
+  font-weight: bold;
+  color: #000;
+}
+.friend__connexion {
+  font-size: 13px;
+}
+.friend__add {
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  color: #000;
+}
+
+.fa-user-plus {
+  margin-right: 5px;
+  color: #34aaff;
+  font-size: 20px;
 }
 
 .card__footer {
@@ -243,8 +339,40 @@ a:active {
   margin-bottom: 0;
 }
 
-.card last child {
+.card_last_child {
   margin-bottom: 0;
+}
+
+.comment {
+  display: flex;
+  justify-content: flex-start;
+  border: 3px solid lightgrey;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 5px;
+}
+
+.post__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  background-color: gainsboro;
+}
+
+label {
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+
+#title {
+  margin-bottom: 5px;
+}
+
+#textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 5px inset;
 }
 
 ul.footer {

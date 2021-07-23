@@ -11,7 +11,7 @@ function getValue() {
   console.log(result)
   console.log(userId)
   if (userId) {
-    return fetch(api('getOneUser') + userId, {
+    return fetch(api('url') + userId, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + sessionStorage.token,
@@ -65,8 +65,8 @@ function displayUserById(userValues) {
 
 
 
-
-//gestion de la modification ou suppression de compte
+//update
+/**********************gestion de la modification ou suppression de compte************************************/
 
 const toggleModify = document.getElementById("settings--btn");
 const toggleDelete = document.getElementById("delete--btn");
@@ -168,18 +168,15 @@ const checkForSubmit = (form) => {
 
   //si tous les champs sont bons isValid sera égal a true
   if (isValid) {
-    // sendData(form);
 
     console.log('isValid')
-    // alert("modifications ok");
-    // function modifyData() {
     let result = JSON.parse(sessionStorage.getItem('user'));
     let userId = result.userId;
     console.log(result)
     console.log(userId)
 
     if (userId) {
-      fetch(api('getOneUser') + userId, {
+      fetch(api('url') + userId, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + result.token,
@@ -200,17 +197,18 @@ const checkForSubmit = (form) => {
     } else {
       alert("error");
     }
-    // }
   };
 };
 
-async function updatePassword() {
-  // let newPassword = await modifyData();
-  // console.log(newPassword.json())
-}
+// async function updatePassword() {
+//   // let newPassword = await modifyData();
+//   // console.log(newPassword.json())
+// }
 
-updatePassword()
+// updatePassword()
 
+
+//delete
 
 const deleteBtn = document.getElementById('deleteUser');
 const deletePassword = document.getElementById('deletPassword');
@@ -224,11 +222,11 @@ deleteBtn.addEventListener('click', function (e) {
 });
 
 async function deleteUser(password) {
-  console.log('ici')
+  // console.log('ici')
   let userValues = await getValue();
-  console.log('val:', userValues)
+  // console.log('val:', userValues)
 
-  fetch(api('getOneUser') + userValues.user.id, {
+  fetch(api('url') + userValues.user.id, {
     method: "DELETE",
     headers: {
 
@@ -246,4 +244,12 @@ async function deleteUser(password) {
       alert(error)
     });
 
+}
+
+const logoutBtn = document.getElementById('logout');
+logoutBtn.addEventListener('click', logout)
+
+function logout() {
+  sessionStorage.clear();
+  window.location.href = "login.html"
 }

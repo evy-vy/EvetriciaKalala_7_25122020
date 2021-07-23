@@ -4,13 +4,13 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const cryptoJs = require('crypto-js');
+// const cryptoJs = require('crypto-js');
 const models = require('../models');
 
 //IV et key me permettent de crypter les email à l'inscription et à la connexion des utilisateurs
 
-let key = cryptoJs.enc.Hex.parse(process.env.AES_KEY);
-let iv = cryptoJs.enc.Hex.parse(process.env.AES_IV);
+// let key = cryptoJs.enc.Hex.parse(process.env.AES_KEY);
+// let iv = cryptoJs.enc.Hex.parse(process.env.AES_IV);
 
 const checkMail = (mail) => {
   let regExpMail = new RegExp("^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}");
@@ -66,7 +66,7 @@ exports.signup = async (req, res, next) => {
             .then(hash => {
               const newUser = models.User.create({
                 username: username,
-                email: cryptoJs.AES.encrypt(email, key, { iv: iv }).toString()/*email*/,
+                email: /*cryptoJs.AES.encrypt(email, key, { iv: iv }).toString()*/email,
                 password: hash,
                 isAdmin: isAdmin || false
               })
@@ -120,10 +120,10 @@ exports.login = (req, res, next) => {
                 token: jwt.sign(
                   {
                     userId: user.id,
-                    // isAdmin: user.isAdmin
+                    isAdmin: user.isAdmin
                   },
                   process.env.TOKEN,
-                  { expiresIn: '24h' }
+                  { expiresIn: '730h' }
                 )
               });
             };
@@ -164,6 +164,7 @@ exports.updateUser = (req, res, next) => {
   const id = req.params.id;
   const newPassword = req.body.newPassword;
   const password = req.body.password;
+
   console.log('A:', newPassword);
 
   if (checkPassword(newPassword)) {
@@ -171,50 +172,113 @@ exports.updateUser = (req, res, next) => {
       attributes: ['id', "password"],
       where: { id: id }
     })
-
       .then((user) => {
         //       console.log('oldPass:', password);
-        console.log('user:', user);
+        console.log('user2:', user);
         console.log('newPassword:', newPassword)
-        console.log('password:', password)
-        let samePassword = newPassword === password;
-        if (!samePassword) {
+        // console.log('password:', password)
+        // console.log('pass user: ', user.password)
+        // let samePassword = newPassword === user.password;
+        // let samePassword;
+        //test
+        bcrypt.compare(password, user.password, function (err, result) {
 
-          console.log('pas le meme mdp')
-          bcrypt.hash(newPassword, 10)
-            .then(hash => {
-              console.log('id: ', id)
+          if (result) {
+            console.log('result : ', result)
+            //     // checkNewPassword(newPassword, user)
 
-              let values = {
-                password: hash,
-                username: req.body.username,
-                isAdmin: req.body.isAdmin,
+            bcrypt.compare(newPassword, user.password, function (err, result) {
+              //       console.log('result2: ', result)
 
+
+              if (!result) {
+
+                console.log('pas le meme mdp')
+                bcrypt.hash(newPassword, 10)
+                  .then(hash => {
+                    console.log('id: ', id)
+
+                    let values = {
+                      password: hash,
+                      // username: req.body.username,
+                      // isAdmin: req.body.isAdmin,
+
+                    };
+
+                    let condition = {
+                      where: { id: id }
+                    }
+
+                    models.User.update(values, condition)
+                      .then(result => {
+                        console.log('result')
+                        res.status(201).json({ message: result + ' data updated' })
+                      })
+                      .catch(error => res.status(500).json({ error }))
+                  })
+                console.log('pass: ', newPassword)
+              } else {
+                console.log('meme mdp')
+                res.status(400).json({ message: "same password: you cannot have same password as above !" })
               };
-
-              let condition = {
-                where: { id: id }
-              }
-
-              models.User.update(values, condition)
-                .then(result => {
-                  console.log('result')
-                  res.status(201).json({ message: ' data updated' })
-                })
-                .catch(error => res.status(500).json(error))
             })
-          console.log('pass: ', newPassword)
-        } else {
-          console.log('meme mot de passe')
-        };
+
+          }
+          else {
+            res.status(400).json({ message: "mauvais mdp" })
+          }
+
+          // }
+          // else {
+          //   console.log('ds else')
+          // }
+        });
+        //fin
+        // bcrypt.compare(newPassword, user.password, function (err, result) {
+        //   console.log('result: ', result)
+
+
+        //   if (!result) {
+
+        //     console.log('pas le meme mdp')
+        //     bcrypt.hash(newPassword, 10)
+        //       .then(hash => {
+        //         console.log('id: ', id)
+
+        //         let values = {
+        //           password: hash,
+        //           // username: req.body.username,
+        //           // isAdmin: req.body.isAdmin,
+
+        //         };
+
+        //         let condition = {
+        //           where: { id: id }
+        //         }
+
+        //         models.User.update(values, condition)
+        //           .then(result => {
+        //             console.log('result')
+        //             res.status(201).json({ message: result + ' data updated' })
+        //           })
+        //           .catch(error => res.status(500).json({ error }))
+        //       })
+        //     console.log('pass: ', newPassword)
+        //   } else {
+        //     console.log('meme mdp')
+        //     res.status(400).json({ message: "same password: you cannot have same password as above !" })
+        //   };
+        // })
+        //fin test
+        // console.log('samePassword out: ', samePassword)
+
       })
-      .catch(error => res.status(500).json(error))
+      .catch(error => res.status(404).json({ message: "user not found", error }))
   }
   else {
-    console.log('password pas valid')
+    res.status(400).json({ message: "wrong password", error })
   }
 };
-
 
 
 //delete user
@@ -237,37 +301,68 @@ exports.deleteUser = (req, res, next) => {
       bcrypt.compare(req.body.password, user.password)
 
         .then(valid => {
-          console.log('coucou 2');
           if (!valid) {
-            console.log('pas pas ok')
             res.status(400).json({ error, message: "wrong password !" });
           } else {
-            console.log('pass ok')
             models.User.destroy({
               where: { id: req.params.id }
             })
               .then(() => {
-                // console.log('test ici')
                 res.status(200).json(
                   { message: 'delete successfully !' }
                 );
               })
               .catch(error => {
-                // console.log('error ', error);
                 res.status(500).json({ error });
                 console.log('erreur a la suppression')
               })
           }
         })
         .catch(error => {
-
-          // console.log('pass control error: ', error)
-          // res.status(500).json(error)
+          res.status(400).json({ message: "pass control error", error })
         }
         );
     })
     .catch(error => {
-      // console.log('mauvais mot de passe: ', error)
+
       res.status(500).json({ error })
     });
 };
+
+// function checkNewPassword(newPassword, user) {
+//   bcrypt.compare(newPassword, user.password, function (err, result) {
+//     console.log('result2: ', result)
+
+
+//     if (!result) {
+
+//       console.log('pas le meme mdp')
+//       bcrypt.hash(newPassword, 10)
+//         .then(hash => {
+//           console.log('id: ', id)
+
+//           let values = {
+//             password: hash,
+//             // username: req.body.username,
+//             // isAdmin: req.body.isAdmin,
+
+//           };
+
+//           let condition = {
+//             where: { id: id }
+//           }
+
+//           models.User.update(values, condition)
+//             .then(result => {
+//               console.log('result')
+//               res.status(201).json({ message: result + ' data updated' })
+//             })
+//             .catch(error => res.status(500).json({ error }))
+//         })
+//       console.log('pass: ', newPassword)
+//     } else {
+//       console.log('meme mdp')
+//       res.status(400).json({ message: "same password: you cannot have same password as above !" })
+//     };
+//   })
+// }

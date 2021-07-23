@@ -1,0 +1,22 @@
+.post__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  background-color: gainsboro;
+}
+
+label {
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+
+#title {
+  margin-bottom: 5px;
+}
+
+#textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 5px inset;
+}

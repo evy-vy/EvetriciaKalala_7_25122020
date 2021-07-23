@@ -3,6 +3,10 @@ html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, tex
   padding: 0;
 }
 
+li {
+  list-style-type: none;
+}
+
 html, body, p {
   font-family: "asap", "open-sans";
 }
@@ -67,32 +71,22 @@ td:not([align]), th:not([align]) {
 
 /*****************Media Queries******************/
 /*media tablette*/
-.header {
-  display: flex;
-  justify-content: center;
-}
-
 .header__container {
   display: flex;
   justify-content: center;
 }
 
 .header__logo {
-  width: 50%;
+  width: 160px;
   display: flex;
   justify-content: center;
   display: flex;
   margin: 10px 5px 35px;
 }
-@media screen and (min-width: 576px) {
-  .header__logo {
-    width: 40%;
-  }
-}
 
 .header__list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 10px;
   margin: 2px;
 }
@@ -241,9 +235,14 @@ label {
   width: 100%;
   height: 65px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 10px;
   margin: 30px 5px 10px;
+}
+@media screen and (min-width: 576px) {
+  .user-settings {
+    justify-content: center;
+  }
 }
 
 #settings--btn {

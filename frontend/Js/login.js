@@ -141,10 +141,6 @@ const checkForSubmit = (form) => {
           loginError.innerText = data.error;
           return false
         }
-
-
-        console.log('data: ', data)
-
       })
       .catch(error => {
         alert(error);
