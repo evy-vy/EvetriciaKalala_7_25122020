@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 const limiter = rateLimit({
-  max: 100,
+  max: 1000000000000000000000000,
   windowMs: 60 * 60 * 1000,
   message: 'Vous avez atteint le nombre de tentative de connexion, veulliez rééssayer dans une heure'
 });

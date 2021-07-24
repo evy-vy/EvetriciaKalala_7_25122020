@@ -20,19 +20,17 @@
 </head>
   <body>
    
-
     <header class="header">
       <div class="header__container">
         <img src="./images/icon-above-font.png" alt="Logo groupomania" class="header__logo"/>
       </div> 
     </header>
     <div class="forum__container">
-
       <nav class="sidebar">
-        <!-- <ul class = "header__list"> -->
+        <!-- <ul class = "header__list">  -->
           <li>
-            <a  href="forum.html" id="add__commentaire" class="sidebar nav active">
-              <i class="fas fa-comments"></i>
+            <a  href="forum.html" id="add__post" class="sidebar nav active">
+              <i class="fas fa-comment-dots"></i>
             </a>
           </li>
           <li>
@@ -47,31 +45,35 @@
           </li>
         <!-- </ul> -->
       </nav>
-      <section class='post__container'>
-        <form methode="POST" action="#" class="form" id="post">
-        <div class="form__container">   
-          <label for="title">Titre*</label>
-          <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
-        </div>
-        <div class="form__container">
-          <label for="content">Message*</label>
-          <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows= "10" cols="30" required ></textarea>
-          <small id="contentWarning"></small>
-        </div>
-        <button id="send-post-btn" class= "check-btn" type="submit" value="envoyer">Envoyer</button>
-      </form>
-      </section>
-      <main class="main">
-        <article class="card">
-          <header class="card__header card__header--avatar">
+      <!-- <section class='post__container'>  -->
+        <form method="post" enctype="multipart/form-data" id="post">
+          <div class="form__container">   
+            <label for="title">Titre* :</label>
+            <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
+          </div>
+          <div>
+            <label for="image">Insérez votre image :</label>
+            <input type="file" name="image" id="image" accept="image/*">
+          </div>
+          <div class="form__container">
+            <label for="content">Message* :</label>
+            <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows= "10" cols="30" required ></textarea>
+            <small id="contentWarning"></small>
+          </div>
+          <button id="send-post-btn" class= "check-btn" type="submit" value="envoyer">Envoyer</button>
+        </form> 
+      <!-- </section> -->
+      <main id="main">
+       <article class="card">
+          <!--<header class="card__header card__header--avatar">
             <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
-            <div class="card__title">
+            <div class="card__pseudo">
               Mon pseudo 
             </div>
             <div class="card__time">Il y à 10 minutes</div>
           </header>
           <div class="card__body">
-            <p>
+            <p classe="para__Img">
               <img src="./images/giphy.gif" alt="image publiée par l'utilisateur" class="card__fullWidth"/>
             </p>
             <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
@@ -84,7 +86,7 @@
                 <i class="far fa-thumbs-up"></i>
               </a>
             </div>
-            <div class="card__like">
+            <div class="card__dislike">
               <a>
                 25  
                 <i class="far fa-thumbs-down"></i>
@@ -93,16 +95,19 @@
             <div class="card__comments">
               <a>
                 12  
-                <i class="far fa-comment-alt"></i></div>
+                <i class="far fa-comment-alt"></i>
               </a>
-          </footer>
-          <ul> 
-            <li class="comment">
-              <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit! Quae, non. Autem expedita, velit commodi aliquam dolore quisquam a impedit possimus accusamus?</p>
-            </li>
-          </ul>
+            </div>
+          </footer> -->
+          <!-- <div id="comments__container">
+            <ul class="comments__list"> 
+              <li class="comment">
+                <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit! Quae, non. Autem expedita, velit commodi aliquam dolore quisquam a impedit possimus accusamus?</p>
+              </li>
+            </ul>
+          </div>  -->
         </article>
-        <article class="card">
+        <!-- <article class="card">
           <header class="card__header card__header--avatar">
             <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
             <div class="card__title">
@@ -130,14 +135,17 @@
             <div class="card__comments">
               <a>
                 12  
-                <i class="far fa-comment-alt"></i></div>
+                <i class="far fa-comment-alt"></i>
               </a>
+            </div>
           </footer>
-          <ul> 
-            <li class="comment">
-              <p class="usersComments">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-            </li>
-          </ul>
+          <div> 
+            <ul> 
+              <li class="comment">
+                <p class="usersComments">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+              </li>
+            </ul>
+          </div>
         </article>
         <article class="card">
           <header class="card__header">
@@ -166,16 +174,19 @@
             <div class="card__comments">
               <a>
                 12  
-                <i class="far fa-comment-alt"></i></div>
+                <i class="far fa-comment-alt"></i>
               </a>
+            </div>  
           </footer>
-          <ul> 
-            <li class="comment">
-              <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit!</p>
-            </li>
-          </ul>
-        </article>
-      </main>
+          <div>
+            <ul> 
+              <li class="comment">
+                <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit!</p>
+              </li>
+            </ul>
+          </div>        
+        </article> -->
+      </main> 
       <aside class="aside profil">
         <article class="aside__card">
           <header class="card__header">
@@ -189,82 +200,80 @@
             <p class="card__text">Lorem ipsum dolor sit amet... 
             </p>
           </div>
-      <!-- </aside> -->
-      <span class="sidebar__title">Suggestion</span>
-      <div class="friends__list">
-        <div class="friend">
-          <img class="friend__avatar" src="
+        </article>
+        <span class="sidebar__title">Suggestion</span>
+        <div class="friends__list">
+          <div class="friend">
+            <img class="friend__avatar" src="
             https://via.placeholder.com/73x73" alt="avatar">
-          <div class="friends-body">
-            <a class="friend__name" href="#">John Doe</a>
+            <div class="friends-body">
+              <a class="friend__name" href="#">John Doe</a>
               <span class="friend__connexion">gpm DRH</span>
-            <a class="friend__add" href="#"> 
-              <i class="fas fa-user-plus"></i>
-              Ajouter en ami
-            </a>
-          </div>    
+              <a class="friend__add" href="#"> 
+                <i class="fas fa-user-plus"></i>
+                Ajouter en ami
+              </a>
+            </div>    
+          </div>
         </div>
-      </div>
-      <div class="friends__list">
-        <div class="friend">
-          <img class="friend__avatar" src="
-            https://via.placeholder.com/73x73" alt="avatar">
-          <div class="friends-body">
-            <a class="friend__name" href="#">John Doe</a>
-              <span class="friend__connexion">gpm DRH</span>
-            <a class="friend__add" href="#"> 
-              <i class="fas fa-user-plus"></i>
-              Ajouter en ami
-            </a>
-          </div>    
+        <div class="friends__list">
+          <div class="friend">
+            <img class="friend__avatar" src="
+              https://via.placeholder.com/73x73" alt="avatar">
+            <div class="friends-body">
+              <a class="friend__name" href="#">John Doe</a>
+                <span class="friend__connexion">gpm DRH</span>
+              <a class="friend__add" href="#"> 
+                <i class="fas fa-user-plus"></i>
+                Ajouter en ami
+              </a>
+            </div>    
+          </div>
+        </div>  
+        <div class="friends__list">
+          <div class="friend">
+            <img class="friend__avatar" src="
+              https://via.placeholder.com/73x73" alt="avatar">
+            <div class="friends-body">
+              <a class="friend__name" href="#">John Doe</a>
+                <span class="friend__connexion">gpm DRH</span>
+              <a class="friend__add" href="#"> 
+                <i class="fas fa-user-plus"></i>
+                Ajouter en ami
+              </a>
+            </div>    
+          </div>
+        </div>  
+        <div class="friends__list">
+          <div class="friend">
+            <img class="friend__avatar" src="
+              https://via.placeholder.com/73x73" alt="avatar">
+            <div class="friends-body">
+              <a class="friend__name" href="#">John Doe</a>
+                <span class="friend__connexion">gpm DRH</span>
+              <a class="friend__add" href="#"> 
+                <i class="fas fa-user-plus"></i>
+                Ajouter en ami
+              </a>
+            </div>    
+          </div>
+        </div>  
+        <div class="friends__list">
+          <div class="friend">
+            <img class="friend__avatar" src="
+              https://via.placeholder.com/73x73" alt="avatar">
+            <div class="friends-body">
+              <a class="friend__name" href="#">John Doe</a>
+                <span class="friend__connexion">gpm DRH</span>
+              <a class="friend__add" href="#"> 
+                <i class="fas fa-user-plus"></i>
+                Ajouter en ami
+              </a>
+            </div>    
+          </div>
         </div>
-      </div>  
-      <div class="friends__list">
-        <div class="friend">
-          <img class="friend__avatar" src="
-            https://via.placeholder.com/73x73" alt="avatar">
-          <div class="friends-body">
-            <a class="friend__name" href="#">John Doe</a>
-              <span class="friend__connexion">gpm DRH</span>
-            <a class="friend__add" href="#"> 
-              <i class="fas fa-user-plus"></i>
-              Ajouter en ami
-            </a>
-          </div>    
-        </div>
-      </div>  
-      <div class="friends__list">
-        <div class="friend">
-          <img class="friend__avatar" src="
-            https://via.placeholder.com/73x73" alt="avatar">
-          <div class="friends-body">
-            <a class="friend__name" href="#">John Doe</a>
-              <span class="friend__connexion">gpm DRH</span>
-            <a class="friend__add" href="#"> 
-              <i class="fas fa-user-plus"></i>
-              Ajouter en ami
-            </a>
-          </div>    
-        </div>
-      </div>  
-      <div class="friends__list">
-        <div class="friend">
-          <img class="friend__avatar" src="
-            https://via.placeholder.com/73x73" alt="avatar">
-          <div class="friends-body">
-            <a class="friend__name" href="#">John Doe</a>
-              <span class="friend__connexion">gpm DRH</span>
-            <a class="friend__add" href="#"> 
-              <i class="fas fa-user-plus"></i>
-              Ajouter en ami
-            </a>
-          </div>    
-        </div>
-      </div>
-    </aside>
-    </main>
-    </div>
-    <!--footer-->
+      </aside>
+    </div> 
     <footer class="footer__container">
       <ul class="footer">
         <li class= footer__link><a href="#">À propos</a></li>
@@ -275,6 +284,7 @@
       </ul>
     </footer>
 
+    <script src="./Js/fonction.js"></script>
     <script src="./Js/api.js"></script>
     <script src="./Js/forum.js"></script>
   </body>

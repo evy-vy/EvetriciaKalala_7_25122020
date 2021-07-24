@@ -399,6 +399,31 @@ textarea.error {
   width: 5rem;
 }
 
+.fas.fa-times-circle {
+  color: blue;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.fas.fa-times-circle:hover {
+  color: red;
+}
+
+.fa-edit {
+  color: blue;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.fa-edit:hover {
+  color: red;
+}
+
+.divIcon {
+  display: flex;
+  justify-content: flex-end;
+}
+
 ul.footer {
   margin-left: 0;
   display: flex;
@@ -414,4 +439,4 @@ ul.footer {
   width: 100%;
 }
 
-/*# sourceMappingURL=forum.css.map */
+/*# sourceMappingURL=singlePost.css.map */

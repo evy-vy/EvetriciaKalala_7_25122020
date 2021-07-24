@@ -36,7 +36,7 @@ a:active {
   @include big-tablette {
       width: 20%;
       display: flex;
-      justify-content: space-around;
+      // justify-content: space-evenly;
       flex-direction: column;
   }
   // background: springgreen;
@@ -68,8 +68,8 @@ a:active {
   }
 }
 
-.main {
-  // background: blue;
+#main {
+  // background: blue;  
   @include big-tablette {
     margin: 0 15px;
     width: 100%;
@@ -111,9 +111,12 @@ a:active {
   }
   &__title {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.3rem;
     color: #000;
     margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
   }
   &__text {
     line-height: 1.2rem;
@@ -127,7 +130,7 @@ a:active {
   } 
   &__footer {
     border-top: dotted 5px rgba(255, 150, 157, 0.25);
-    border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
+    // border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
     display: flex;
     // justify-content: space-between;
     padding: 10px;
@@ -140,6 +143,9 @@ a:active {
 .aside__card {
   // border: solid 2px lightgray;
   // border-radius: 6px;
+
+  border: 1px solid black;
+  border-radius: 3px;
   margin-bottom: 30px;
   &__header {
     padding: 10px;

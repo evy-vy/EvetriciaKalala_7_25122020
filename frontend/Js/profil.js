@@ -76,6 +76,7 @@ const remove = document.getElementById('remove');
 toggleModify.addEventListener('click', () => {
   if (getComputedStyle(modify).display == "none") {
     modify.style.display = "block";
+    remove.style.display = "none";
   } else {
     modify.style.display = "none";
   }
@@ -84,6 +85,7 @@ toggleModify.addEventListener('click', () => {
 toggleDelete.addEventListener('click', () => {
   if (getComputedStyle(remove).display == "none") {
     remove.style.display = "block";
+    modify.style.display = "none";
   } else {
     remove.style.display = "none";
   }
@@ -189,6 +191,8 @@ const checkForSubmit = (form) => {
         })
       })
         .then(response => {
+          console.log('donnee modifié');
+          modify.style.display = "none";
           return response.json
         })
         .catch(error => {
@@ -199,13 +203,6 @@ const checkForSubmit = (form) => {
     }
   };
 };
-
-// async function updatePassword() {
-//   // let newPassword = await modifyData();
-//   // console.log(newPassword.json())
-// }
-
-// updatePassword()
 
 
 //delete

@@ -4,7 +4,8 @@ const api = (url) => {
     postUserSignUp: "http://localhost:3000/api/auth/signup",
     postUserLogIn: "http://localhost:3000/api/auth/login",
     url: "http://localhost:3000/api/auth/",
-    post: "http://localhost:3000/api/post/"
+    post: "http://localhost:3000/api/post/",
+    comment: "http://localhost:3000/api/comment/"
 
   }
 
