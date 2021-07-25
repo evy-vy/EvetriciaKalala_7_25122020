@@ -1,0 +1,25 @@
+#commentsForm {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  @include tablette {
+    // margin-top: 10px;
+  }
+}
+
+#textComment {
+  width: 80%;
+  padding: 10px;
+}
+
+#comId {
+  width: 40px;
+  @include tablette {
+    width: 60px;
+  }
+}
+
+#commentsList {
+  display: none;
+  padding: 10px;
+}

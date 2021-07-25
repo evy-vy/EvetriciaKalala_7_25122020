@@ -26,23 +26,21 @@
     </header>
     <div class="forum__container">
       <nav class="sidebar">
-        <!-- <ul class = "header__list">  -->
-          <li>
-            <a  href="forum.html" id="add__post" class="sidebar nav active">
-              <i class="fas fa-comment-dots"></i>
-            </a>
-          </li>
-          <li>
-            <a href="profil.html" class="sidebar nav">
-              <i class="fas fa-user"></i>
-            </a>
-          </li>
-          <li id="logout">
-            <a href="#" class= "sidebar nav">
-              <i class="fas fa-walking"></i>
-            </a>
-          </li>
-        <!-- </ul> -->
+        <li>
+          <a  href="forum.html" id="add__post" class="sidebar nav active">
+            <i class="fas fa-comment-dots"></i>
+          </a>
+        </li>
+        <li>
+          <a href="profil.html" class="sidebar nav">
+            <i class="fas fa-user"></i>
+          </a>
+        </li>
+        <li id="logout">
+          <a href="#" class= "sidebar nav">
+            <i class="fas fa-walking"></i>
+          </a>
+        </li>
       </nav>
       <form method="post" enctype="multipart/form-data" id="post">
         <div class="form__container">   
@@ -63,6 +61,7 @@
       <main id="main">
         
       </main> 
+      <ul id="ulComments"></ul>
       <footer class="footer__container">
         <ul class="footer">
           <li class= footer__link><a href="#">À propos</a></li>
@@ -74,6 +73,6 @@
       </footer>
       <script src="./Js/fonction.js"></script>
     <script src="./Js/api.js"></script>
-  <script src="./Js/singlePost.js"></script>
+    <script src="./Js/singlePost.js"></script>
   </body>
 </html>

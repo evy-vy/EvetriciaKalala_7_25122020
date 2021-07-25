@@ -72,7 +72,6 @@ const addPost = document.getElementById('add__post');
 // }
 
 function getPosts() {
-  console.log('ini')
 
   //Recuperer tous les messages
   return fetch(api("post"), {
@@ -83,7 +82,6 @@ function getPosts() {
     },
   })
     .then(response => {
-      console.log('return')
       return response.json();
     })
     .catch(error => {
@@ -95,7 +93,6 @@ async function getAllPosts() {
   const result = await getPosts();
   //Les affichés
   for (post of result.posts) {
-    console.log(post);
     displayPosts(post);
   }
 }
@@ -105,9 +102,6 @@ async function getAllPosts() {
 
 
 function displayPosts(post) {
-  // console.log('post: ', post);
-  console.log('userId: ', post.userId);
-  console.log('username: ', post.User.username);
 
   const article = document.createElement('article');
   article.dataset.key = post.id;
@@ -139,7 +133,6 @@ function displayPosts(post) {
   let paragrapheImg = null;
   let imageBody = null;
   if (post.imageURL != null) {
-    console.log('img ok')
     paragrapheImg = document.createElement('p');
     paragrapheImg.classList.add('para__Img');
 
@@ -180,7 +173,6 @@ function displayPosts(post) {
 
   const commentLink = document.createElement('a');
   commentLink.setAttribute('href', './singlePost.html?id=' + post.id);
-  // commentLink.id = 'displayComs';
   commentLink.innerText = 65;
   const commentIcon = document.createElement('i');
   commentIcon.setAttribute('class', 'far fa-comment-alt');
@@ -189,7 +181,6 @@ function displayPosts(post) {
   article.append(header, divBody, postFooter);
   header.append(imageProfil, divPseudo, divTime, title);
 
-  console.log("paragrapheImg:", paragrapheImg)
   if (paragrapheImg !== null) {
     divBody.append(paragrapheImg);
     paragrapheImg.append(imageBody);
@@ -230,6 +221,8 @@ toggleDisplayForm.addEventListener('click', (e) => {
     displayForm.style.display = "none";
   }
 })
+
+
 
 /*********************logout*****************/
 const logoutBtn = document.getElementById('logout');

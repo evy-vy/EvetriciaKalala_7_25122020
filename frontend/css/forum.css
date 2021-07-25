@@ -227,6 +227,7 @@ a:active {
 }
 .card__footer {
   border-top: dotted 5px rgba(255, 150, 157, 0.25);
+  border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
   display: flex;
   padding: 10px;
   font-size: 14px;
@@ -346,12 +347,12 @@ a:active {
   margin-bottom: 0;
 }
 
-.comment {
+.commentsLi {
   display: flex;
   justify-content: flex-start;
   border: 3px solid lightgrey;
   padding: 20px;
-  margin: 15px;
+  margin: 10px;
   border-radius: 5px;
 }
 

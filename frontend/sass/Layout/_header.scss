@@ -1,9 +1,4 @@
 
-// .header {
-//   display: flex;
-//   justify-content: center;
-// }
-
 .header__container {
   display: flex;
   justify-content: center;
@@ -11,31 +6,17 @@
 
 .header__logo {
   width: 160px;
-  // margin: -40px 0 -60px;
   display: flex;
   justify-content: center;
   display: flex;
   margin: 10px 5px 35px;
-  // @include tablette {
-  //   width: 40%;
-  // }
 }
-
-// .header__nav {
-//   display: flex;
-//     position: absolute;
-//     width: 100%;
-    
-// }
 
 .header__list {
   display: flex;
   justify-content: space-evenly;
   padding: 10px;
   margin: 2px;
-  // @include tablette {
-  //   justify-content: space-evenly;
-  // }
 }
 
 .header__link--visited {

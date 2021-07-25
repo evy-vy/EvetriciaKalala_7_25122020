@@ -27,165 +27,42 @@
     </header>
     <div class="forum__container">
       <nav class="sidebar">
-        <!-- <ul class = "header__list">  -->
-          <li>
-            <a  href="forum.html" id="add__post" class="sidebar nav active">
-              <i class="fas fa-comment-dots"></i>
-            </a>
-          </li>
-          <li>
-            <a href="profil.html" class="sidebar nav">
-              <i class="fas fa-user"></i>
-            </a>
-          </li>
-          <li id="logout">
-            <a href="#" class= "sidebar nav">
-              <i class="fas fa-walking"></i>
-            </a>
-          </li>
-        <!-- </ul> -->
+        <li>
+          <a  href="forum.html" id="add__post" class="sidebar nav active">
+            <i class="fas fa-comment-dots"></i>
+          </a>
+        </li>
+        <li>
+          <a href="profil.html" class="sidebar nav">
+            <i class="fas fa-user"></i>
+          </a>
+        </li>
+        <li id="logout">
+          <a href="#" class= "sidebar nav">
+            <i class="fas fa-walking"></i>
+          </a>
+        </li>
       </nav>
-      <!-- <section class='post__container'>  -->
-        <form method="post" enctype="multipart/form-data" id="post">
-          <div class="form__container">   
-            <label for="title">Titre* :</label>
-            <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
-          </div>
-          <div>
-            <label for="image">Insérez votre image :</label>
-            <input type="file" name="image" id="image" accept="image/*">
-          </div>
-          <div class="form__container">
-            <label for="content">Message* :</label>
-            <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows= "10" cols="30" required ></textarea>
-            <small id="contentWarning"></small>
-          </div>
-          <button id="send-post-btn" class= "check-btn" type="submit" value="envoyer">Envoyer</button>
-        </form> 
-      <!-- </section> -->
+      <form method="post" enctype="multipart/form-data" id="post">
+        <div class="form__container">   
+          <label for="title">Titre* :</label>
+          <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
+        </div>
+        <div>
+          <label for="image">Insérez votre image :</label>
+          <input type="file" name="image" id="image" accept="image/*">
+        </div>
+        <div class="form__container">
+          <label for="content">Message* :</label>
+          <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows= "10" cols="30" required ></textarea>
+          <small id="contentWarning"></small>
+        </div>
+        <button id="send-post-btn" class= "check-btn" type="submit" value="envoyer">Envoyer</button>
+      </form> 
       <main id="main">
        <article class="card">
-          <!--<header class="card__header card__header--avatar">
-            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
-            <div class="card__pseudo">
-              Mon pseudo 
-            </div>
-            <div class="card__time">Il y à 10 minutes</div>
-          </header>
-          <div class="card__body">
-            <p classe="para__Img">
-              <img src="./images/giphy.gif" alt="image publiée par l'utilisateur" class="card__fullWidth"/>
-            </p>
-            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
-            </p>
-          </div>
-          <footer class="card__footer">
-            <div class="card__like">
-              <a href="#">
-                120  
-                <i class="far fa-thumbs-up"></i>
-              </a>
-            </div>
-            <div class="card__dislike">
-              <a>
-                25  
-                <i class="far fa-thumbs-down"></i>
-              </a>
-            </div>
-            <div class="card__comments">
-              <a>
-                12  
-                <i class="far fa-comment-alt"></i>
-              </a>
-            </div>
-          </footer> -->
-          <!-- <div id="comments__container">
-            <ul class="comments__list"> 
-              <li class="comment">
-                <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit! Quae, non. Autem expedita, velit commodi aliquam dolore quisquam a impedit possimus accusamus?</p>
-              </li>
-            </ul>
-          </div>  -->
+  
         </article>
-        <!-- <article class="card">
-          <header class="card__header card__header--avatar">
-            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class = "card__avatar">
-            <div class="card__title">
-              Mon pseudo 
-            </div>
-            <div class="card__time">Il y à 10 minutes</div>
-          </header>
-          <div class="card__body">
-            <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, minima.
-            </p>
-          </div>
-          <footer class="card__footer">
-            <div class="card__like">
-              <a href="#">
-                120  
-                <i class="far fa-thumbs-up"></i>
-              </a>
-            </div>
-            <div class="card__like">
-              <a>
-                25  
-                <i class="far fa-thumbs-down"></i>
-              </a>
-            </div>
-            <div class="card__comments">
-              <a>
-                12  
-                <i class="far fa-comment-alt"></i>
-              </a>
-            </div>
-          </footer>
-          <div> 
-            <ul> 
-              <li class="comment">
-                <p class="usersComments">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-              </li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <header class="card__header">
-            <div class="card__title">
-              Mon pseudo 
-            </div>
-            <div class="card__time">Il y à 10 minutes</div>
-          </header>
-          <div class="card__body">
-            <p class="card__text">Lorem ipsum dolor sit amet..
-            </p>
-          </div>
-          <footer class="card__footer">
-            <div class="card__like">
-              <a href="#">
-                120  
-                <i class="far fa-thumbs-up"></i>
-              </a>
-            </div>
-            <div class="card__like">
-              <a>
-                25  
-                <i class="far fa-thumbs-down"></i>
-              </a>
-            </div>
-            <div class="card__comments">
-              <a>
-                12  
-                <i class="far fa-comment-alt"></i>
-              </a>
-            </div>  
-          </footer>
-          <div>
-            <ul> 
-              <li class="comment">
-                <p class="usersComments">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ut quae corporis consequuntur repellat hic, alias velit!</p>
-              </li>
-            </ul>
-          </div>        
-        </article> -->
       </main> 
       <aside class="aside profil">
         <article class="aside__card">

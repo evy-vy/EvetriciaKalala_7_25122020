@@ -10,17 +10,12 @@ a:active {
   font-weight: bold;
   text-decoration: underline;
   transition: opacity 0.3s;
-  // border: solid 1px gray;
-  // border-radius: 3px;
-  // background-color: lightgray;
   font-weight: bold;
 }
 
 
 .forum__container {
   padding: 0 15px;
-  // max-width: 1080px;
-  // display: flex;
   margin: 0 auto;
   @include big-tablette {
     display: flex;
@@ -36,11 +31,8 @@ a:active {
   @include big-tablette {
       width: 20%;
       display: flex;
-      // justify-content: space-evenly;
       flex-direction: column;
   }
-  // background: springgreen;
- 
 }
 
 .sidebar a {
@@ -48,14 +40,12 @@ a:active {
   align-items: center;
   padding: 0.6em 0;
   width: 100%;
-// flex-direction: column;
 }
 
 .fas,
 .far {
   vertical-align: middle;
   margin-top: -5px;
-  // padding-right: 2px;
   width: 23px;
   height: 30px;
   opacity: 0.67;
@@ -69,7 +59,6 @@ a:active {
 }
 
 #main {
-  // background: blue;  
   @include big-tablette {
     margin: 0 15px;
     width: 100%;
@@ -130,19 +119,14 @@ a:active {
   } 
   &__footer {
     border-top: dotted 5px rgba(255, 150, 157, 0.25);
-    // border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
+    border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
     display: flex;
-    // justify-content: space-between;
     padding: 10px;
-    // width: 15px;
-    // height: 15px;
     font-size: 14px;
   } 
 }
 
 .aside__card {
-  // border: solid 2px lightgray;
-  // border-radius: 6px;
 
   border: 1px solid black;
   border-radius: 3px;
@@ -190,8 +174,6 @@ a:active {
   color: #000;
   font-size: 16px;
   font-weight: bold;
-//   margin-top: 15px;
-//   margin-bottom: 18px;
 }
 
 .sidebar__title::after {
@@ -236,22 +218,10 @@ a:active {
   font-size: 20px;
 }
 
-// .friend__add::before {
-//   content: '';
-//   display: inline-block;
-//   width: 17px;
-//   height: 13px;
-//   vertical-align: middle;
-
-// }
-
-
 .card__footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  // padding-left: 20px;
-  
+  justify-content: space-around;  
 }
 
 .card__fullWidth {
@@ -271,11 +241,11 @@ a:active {
   margin-bottom: 0;
 }
 
-.comment {
+.commentsLi {
   display: flex;
     justify-content: flex-start;
     border: 3px solid lightgrey;
     padding: 20px;
-    margin: 15px;
+    margin: 10px;
     border-radius: 5px;
 }

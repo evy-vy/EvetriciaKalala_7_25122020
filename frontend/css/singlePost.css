@@ -227,6 +227,7 @@ a:active {
 }
 .card__footer {
   border-top: dotted 5px rgba(255, 150, 157, 0.25);
+  border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
   display: flex;
   padding: 10px;
   font-size: 14px;
@@ -346,12 +347,12 @@ a:active {
   margin-bottom: 0;
 }
 
-.comment {
+.commentsLi {
   display: flex;
   justify-content: flex-start;
   border: 3px solid lightgrey;
   padding: 20px;
-  margin: 15px;
+  margin: 10px;
   border-radius: 5px;
 }
 
@@ -399,13 +400,50 @@ textarea.error {
   width: 5rem;
 }
 
+#commentsForm {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+#textComment {
+  width: 80%;
+  padding: 10px;
+}
+
+#comId {
+  width: 40px;
+}
+@media screen and (min-width: 576px) {
+  #comId {
+    width: 60px;
+  }
+}
+
+#commentsList {
+  display: none;
+  padding: 10px;
+}
+
 .fas.fa-times-circle {
   color: blue;
   cursor: pointer;
   display: flex;
   justify-content: flex-end;
+  font-size: 1rem;
 }
 .fas.fa-times-circle:hover {
+  color: red;
+}
+
+#deleteCom {
+  color: blue;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1rem;
+  width: 100%;
+}
+#deleteCom:hover {
   color: red;
 }
 
@@ -414,6 +452,7 @@ textarea.error {
   cursor: pointer;
   display: flex;
   justify-content: flex-end;
+  font-size: 1rem;
 }
 .fa-edit:hover {
   color: red;

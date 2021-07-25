@@ -8,8 +8,7 @@ if (!sessionStorage.user) {
 function getValue() {
   let result = JSON.parse(sessionStorage.getItem('user'));
   let userId = result.userId;
-  console.log(result)
-  console.log(userId)
+
   if (userId) {
     return fetch(api('url') + userId, {
       method: "GET",
@@ -30,13 +29,10 @@ function getValue() {
 };
 
 async function userById() {
-  console.log('ici')
   let userValues = await getValue();
-  console.log(userValues)
   displayUserById(userValues);
 }
 
-// getValue()
 userById();
 
 function displayUserById(userValues) {
@@ -62,8 +58,6 @@ function displayUserById(userValues) {
 
   document.getElementById("profil__data").append(username, isAdmin, email, createdAt, updatedAt)
 }
-
-
 
 //update
 /**********************gestion de la modification ou suppression de compte************************************/
@@ -139,13 +133,11 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   e.stopPropagation();
 
-  console.log('click')
-
   checkForSubmit(e.target); // On envoi le form pour recupérer les champs 
 })
 
 const checkForSubmit = (form) => {
-  // console.log('coucou');
+
   const fields = [
     {
       "type": "password",
@@ -156,14 +148,13 @@ const checkForSubmit = (form) => {
       "value": form.elements["newPassword"].value
     }
   ];
-  // console.log('je suis la')
+
   let isValid = false;
 
   fields.forEach((data) => {
-    // console.log('et la aussi');
     //on parcours notre tableaux de champs, et on execute notre fonction de vérification
     isValid = verifInput(data["value"], data["type"]);
-    if (!isValid) { //si isValid est false on sort de la boucle
+    if (!isValid) {
       return false
     }
   })
@@ -171,11 +162,8 @@ const checkForSubmit = (form) => {
   //si tous les champs sont bons isValid sera égal a true
   if (isValid) {
 
-    console.log('isValid')
     let result = JSON.parse(sessionStorage.getItem('user'));
     let userId = result.userId;
-    console.log(result)
-    console.log(userId)
 
     if (userId) {
       fetch(api('url') + userId, {
@@ -191,7 +179,6 @@ const checkForSubmit = (form) => {
         })
       })
         .then(response => {
-          console.log('donnee modifié');
           modify.style.display = "none";
           return response.json
         })
@@ -219,9 +206,8 @@ deleteBtn.addEventListener('click', function (e) {
 });
 
 async function deleteUser(password) {
-  // console.log('ici')
+
   let userValues = await getValue();
-  // console.log('val:', userValues)
 
   fetch(api('url') + userValues.user.id, {
     method: "DELETE",
@@ -235,7 +221,6 @@ async function deleteUser(password) {
     })
   })
     .then(result => {
-      console.log('result: ', result)
     })
     .catch(error => {
       alert(error)
