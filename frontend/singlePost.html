@@ -43,6 +43,7 @@
         </li>
       </nav>
       <form method="post" enctype="multipart/form-data" id="post">
+        <span id="form-error"></span>
         <div class="form__container">   
           <label for="title">Titre* :</label>
           <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
@@ -61,8 +62,10 @@
       <main id="main">
         
       </main> 
-      <ul id="ulComments"></ul>
-      <footer class="footer__container">
+      <!-- <ul id="ulComments"></ul> -->
+    </div> 
+    <ul id="ulComments"></ul>
+      <footer class="footer__container footer__bottom">
         <ul class="footer">
           <li class= footer__link><a href="#">À propos</a></li>
           <li class="dot">&middot;</li>

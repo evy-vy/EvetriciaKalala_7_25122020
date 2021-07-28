@@ -221,6 +221,8 @@ async function deleteUser(password) {
     })
   })
     .then(result => {
+      remove.style.display = "none";
+      return result.json()
     })
     .catch(error => {
       alert(error)

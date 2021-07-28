@@ -1,0 +1,36 @@
+com single post
+
+conteneur commentaire
+.commentsLi {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    border: 3px solid lightgrey;
+    padding: 20px;
+    margin: 10px;
+    padding-right: 40px;
+    border-radius: 5px;
+}
+
+
+#deleteCom {
+    color: blue;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 24px;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    font-size: 1rem;
+    /* width: 100%; */
+}
+
+span.comUsername {
+    position: absolute;
+    bottom: 0px;
+    right: 6px;
+    font-size: 12px;
+    color: #727272;
+    font-style: italic;
+}
+

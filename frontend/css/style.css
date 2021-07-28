@@ -13,7 +13,7 @@ html, body, p {
 
 body {
   max-width: 100%;
-  margin: 10px 25px;
+  /*margin:10px 25px;*/
   /*background: #f1f1f1*/
 }
 
@@ -74,6 +74,7 @@ td:not([align]), th:not([align]) {
 .header__container {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .header__logo {
@@ -99,9 +100,37 @@ td:not([align]), th:not([align]) {
   font-size: 1.3rem;
 }
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#inscription,
+#connexion {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 576px) {
+  #inscription,
+#connexion {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 section.login__container {
   display: flex;
   flex-direction: column;
+}
+@media screen and (min-width: 576px) {
+  section.login__container {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 850px) {
+  section.login__container {
+    width: 45%;
+  }
 }
 
 .login__heading {
@@ -112,7 +141,7 @@ section.login__container {
 
 .login__span {
   font-size: 0.9rem;
-  color: #989eb1;
+  color: #6e758c;
   padding-bottom: 20px;
   margin-bottom: 15px;
 }
@@ -125,7 +154,7 @@ section.login__container {
 }
 
 label {
-  color: #f85f6a;
+  color: #de3310;
   margin-bottom: 10px;
 }
 
@@ -133,12 +162,18 @@ label {
   margin-top: 15px;
   font-size: 0.8rem;
 }
+@media screen and (min-width: 576px) {
+  .terms__container {
+    display: flex;
+    justify-content: center;
+  }
+}
 
 .terms {
   color: #000;
 }
 .terms a {
-  color: #f85f6a;
+  color: #de3310;
 }
 
 .input__form {
@@ -170,18 +205,20 @@ label {
 
 .check-btn {
   display: flex;
-  width: 100%;
+  width: 7rem;
   height: 2rem;
   display: flex;
   justify-content: center;
+  align-self: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 1.1rem;
-  background-color: #f85f6a;
-  border: #fff;
+  background-color: #ffd7d7;
+  border-right: 1px solid lightslategrey;
+  outline: none;
   border-radius: 5px;
   padding: 20px;
-  color: #fff;
+  color: #212121;
 }
 
 ul.footer {
@@ -191,12 +228,20 @@ ul.footer {
 }
 
 .footer__container {
-  margin: 50px 0;
-  padding: 10px 0;
+  margin-top: 50px;
   border-top: 2px dotted lightgray;
-  position: relative;
-  bottom: 0;
+  position: absolute;
   width: 100%;
+  font-size: 0.9rem;
+  padding: 10px;
+}
+.footer__bottom {
+  margin-top: 50px;
+  border-top: 2px dotted lightgray;
+  position: absolute;
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 40px 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

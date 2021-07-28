@@ -38,18 +38,16 @@ exports.signup = async (req, res, next) => {
   const isAdmin = req.body.isAdmin;
 
   if (email === null || username === null || password === null) {
-    return res.status(400).json({ 'error': 'missing parameters' });
+    res.status(400).json({ message: "Error, missing parameters" });
   }
-  console.log('coucou');
 
 
   if (!checkMail(email)) {
-    console.log(email);
-    res.status(400).json({ message: "Veuillez saisir une adresse email valide" });
+    res.status(400).json({ message: "Please, enter a valid password" });
   }
   console.log(email);
   if (!checkPassword(password)) {
-    res.status(400).json({ message: "Merci de saisir un mot de passe sécurisé : 8 caractères min, 15 caractères max, au moins : 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère spécial" });
+    res.status(400).json({ message: "Your password must contain at least: 8 characters, one number, and includes both lower and uppercase letters and special characters" });
   }
   if (!checkUsername(username)) {
     res.status(400).json({ message: "please, enter a valid username" })
@@ -73,14 +71,14 @@ exports.signup = async (req, res, next) => {
                 .then(user => {
                   res.status(201).json({ message: ' new user created ! (userid : ' + user.id + ')' });
                 })
-                .catch(error => res.status(500).json({ message: "Probleme de compte", error: error }));
+                .catch(error => res.status(500).json({ error }));
             })
-            .catch(error => res.status(500).json({ message: "Probleme de compte", error: error }));
+            .catch(error => res.status(500).json({ error }));
         } else {
           return res.status(409).json({ 'error': 'user already exist ' });
         }
       })
-      .catch(error => res.status(500).json({ error })); //requête qui s'effectue mal, on envoi une erreur pour dire qu'on ne peut pas verif si l'utilisateur existe ou pas. 
+      .catch(error => res.status(401).json({ error: 'Bad request' })); //requête qui s'effectue mal, on envoi une erreur pour dire qu'on ne peut pas verif si l'utilisateur existe ou pas. 
   } else {
     res.status(500).json({ error: 'Error with provided informations' });
   }
@@ -89,32 +87,30 @@ exports.signup = async (req, res, next) => {
 //login
 
 exports.login = (req, res, next) => {
-  // const email = req.body.email;
-  // const userId = req.params.id
+
   const username = req.body.username;
   const password = req.body.password;
   // const encryptedEmail = cryptoJs.AES.encrypt(email, key, { iv: iv }).toString();
 
-  if (username === null || password === null /*|| email === null*/) {
+  if (username === null || password === null) {
     return res.status(400).json({ 'error': 'missing parameters' });
   }
 
-  if (checkUsername(username) === true /*&& checkMail(email) === true*/ && checkPassword(password) === true) {
+  if (checkUsername(username) === true && checkPassword(password) === true) {
 
     models.User.findOne({
-      where: { username: username/*, email: encryptedEmail*/ }
+      where: { username: username }
     })
       .then(user => {
         if (!user) {
-          return res.status(401).json({ error: 'user not found !' }); //401 = non autorisé
+          return res.status(401).json({ error: 'user not found !' });
         }
         bcrypt.compare(password, user.password) //on compare le mdp utilisateur et le hash
           .then(valid => {
             if (!valid) {
-              return res.status(401).json({ error: 'wrong password !' });
+              return res.status(401).json({ error: 'Wrong password. please try again' });
             } else {
 
-              // console.log('user: ', user)
               res.status(200).json({
                 userId: user.id,
                 token: jwt.sign(
@@ -128,7 +124,7 @@ exports.login = (req, res, next) => {
               });
             };
           })
-          .catch(error => res.status(500).json({ error })); //erreur server
+          .catch(error => res.status(401).json({ error, message: 'Unauthorized' }));
       })
       .catch(error => res.status(500).json({ error }));
   } else {
@@ -141,7 +137,6 @@ exports.login = (req, res, next) => {
 
 exports.getUserProfile = (req, res, next) => {
 
-  // const username = req.params.username;
   const id = req.params.id;
 
   models.User.findOne({
@@ -150,12 +145,12 @@ exports.getUserProfile = (req, res, next) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(404).json({ message: "user not found", error });
+        return res.status(404).json({ message: "User Not Found", error });
       } else {
         res.status(200).json({ user })
       }
     })
-    .catch(error => res.status(404).json({ message: "user not found ", error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
 // update profile
@@ -165,7 +160,7 @@ exports.updateUser = (req, res, next) => {
   const newPassword = req.body.newPassword;
   const password = req.body.password;
 
-  console.log('A:', newPassword);
+  // console.log('A:', newPassword);
 
   if (checkPassword(newPassword)) {
     models.User.findOne({
@@ -173,23 +168,16 @@ exports.updateUser = (req, res, next) => {
       where: { id: id }
     })
       .then((user) => {
-        //       console.log('oldPass:', password);
+
         console.log('user2:', user);
         console.log('newPassword:', newPassword)
-        // console.log('password:', password)
-        // console.log('pass user: ', user.password)
-        // let samePassword = newPassword === user.password;
-        // let samePassword;
-        //test
+
         bcrypt.compare(password, user.password, function (err, result) {
 
           if (result) {
             console.log('result : ', result)
-            //     // checkNewPassword(newPassword, user)
 
             bcrypt.compare(newPassword, user.password, function (err, result) {
-              //       console.log('result2: ', result)
-
 
               if (!result) {
 
@@ -199,12 +187,8 @@ exports.updateUser = (req, res, next) => {
                     console.log('id: ', id)
 
                     let values = {
-                      password: hash,
-                      // username: req.body.username,
-                      // isAdmin: req.body.isAdmin,
-
+                      password: hash
                     };
-
                     let condition = {
                       where: { id: id }
                     }
@@ -219,64 +203,19 @@ exports.updateUser = (req, res, next) => {
                 console.log('pass: ', newPassword)
               } else {
                 console.log('meme mdp')
-                res.status(400).json({ message: "same password: you cannot have same password as above !" })
+                res.status(400).json({ message: "Same password: you cannot have same password as above !" })
               };
             })
-
           }
           else {
-            res.status(400).json({ message: "mauvais mdp" })
+            res.status(400).json({ message: "Wrong Password, please try again" })
           }
 
-          // }
-          // else {
-          //   console.log('ds else')
-          // }
         });
-        //fin
-        // bcrypt.compare(newPassword, user.password, function (err, result) {
-        //   console.log('result: ', result)
-
-
-        //   if (!result) {
-
-        //     console.log('pas le meme mdp')
-        //     bcrypt.hash(newPassword, 10)
-        //       .then(hash => {
-        //         console.log('id: ', id)
-
-        //         let values = {
-        //           password: hash,
-        //           // username: req.body.username,
-        //           // isAdmin: req.body.isAdmin,
-
-        //         };
-
-        //         let condition = {
-        //           where: { id: id }
-        //         }
-
-        //         models.User.update(values, condition)
-        //           .then(result => {
-        //             console.log('result')
-        //             res.status(201).json({ message: result + ' data updated' })
-        //           })
-        //           .catch(error => res.status(500).json({ error }))
-        //       })
-        //     console.log('pass: ', newPassword)
-        //   } else {
-        //     console.log('meme mdp')
-        //     res.status(400).json({ message: "same password: you cannot have same password as above !" })
-        //   };
-        // })
-        //fin test
-        // console.log('samePassword out: ', samePassword)
-
       })
-      .catch(error => res.status(404).json({ message: "user not found", error }))
-  }
-  else {
-    res.status(400).json({ message: "wrong password", error })
+      .catch(error => res.status(404).json({ message: "User not found", error }))
+  } else {
+    res.status(400).json({ message: "Wrong password", error })
   }
 };
 
@@ -328,41 +267,3 @@ exports.deleteUser = (req, res, next) => {
       res.status(500).json({ error })
     });
 };
-
-// function checkNewPassword(newPassword, user) {
-//   bcrypt.compare(newPassword, user.password, function (err, result) {
-//     console.log('result2: ', result)
-
-
-//     if (!result) {
-
-//       console.log('pas le meme mdp')
-//       bcrypt.hash(newPassword, 10)
-//         .then(hash => {
-//           console.log('id: ', id)
-
-//           let values = {
-//             password: hash,
-//             // username: req.body.username,
-//             // isAdmin: req.body.isAdmin,
-
-//           };
-
-//           let condition = {
-//             where: { id: id }
-//           }
-
-//           models.User.update(values, condition)
-//             .then(result => {
-//               console.log('result')
-//               res.status(201).json({ message: result + ' data updated' })
-//             })
-//             .catch(error => res.status(500).json({ error }))
-//         })
-//       console.log('pass: ', newPassword)
-//     } else {
-//       console.log('meme mdp')
-//       res.status(400).json({ message: "same password: you cannot have same password as above !" })
-//     };
-//   })
-// }

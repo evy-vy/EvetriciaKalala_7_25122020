@@ -1,79 +1,17 @@
+//on verifie si un post est 1er pour pouvoir lui passer un message "new"
+let isFirst = true;
+
 if (!sessionStorage.user) {
   window.location.href = "login.html";
 }
 
+//permet de recuperer tous les post dès l'acces a la page
 getAllPosts();
 
 const addPost = document.getElementById('add__post');
-// addPost.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   e.stopPropagation();
 
-//   console.log('addPost');
-// })
-
-
-// async function sendPost2(e) {
-//   console.log('sendPost')
-//   e.preventDefault();
-//   e.stopPropagation();
-
-//   const user = JSON.parse(sessionStorage.user);
-//   const userId = user.userId;
-//   const token = user.token;
-//   let image = document.getElementById('image').files[0];
-//   const titleElt = document.getElementById('title');
-//   const title = titleElt.value;
-
-//   const contentElt = document.getElementById("content");
-//   const content = contentElt.value;
-
-//   let headers = {
-//     "authorization": "Bearer " + token,
-//     "Accept": "application/json",
-//   };
-
-//   let body = '';
-//   if (image) {
-//     console.log('image ok')
-//     const formData = new FormData();
-//     formData.append('image', image);
-
-//     formData.append('userId', userId);
-//     formData.append('title', title);
-//     formData.append('content', content);
-//     body = formData;
-//   } else {
-//     headers["Content-Type"] = "application/json"
-//     body = JSON.stringify({
-//       userId: userId,
-//       title: title,
-//       content: content
-//     });
-
-//   }
-
-//   //envoyer les données
-//   fetch(api("post"), {
-//     method: "POST",
-//     headers: headers,
-//     body: body
-//   })
-//     .then(response => {
-//       console.log('ici2');
-//       displayForm.style.display = "none";
-//       window.location.reload();
-
-//     })
-//     .catch(error => {
-//       alert(error)
-//     });
-//   console.log("coucou");
-// }
-
+//Fonction pour recuperer tous les messages
 function getPosts() {
-
-  //Recuperer tous les messages
   return fetch(api("post"), {
     method: "GET",
     headers: {
@@ -88,127 +26,91 @@ function getPosts() {
       alert(error)
     });
 }
-
+//on récupère chaque post dans l'array de posts
 async function getAllPosts() {
   const result = await getPosts();
-  //Les affichés
   for (post of result.posts) {
     displayPosts(post);
+    //On verifie s'il y a un élément dans le localstorage, si oui on verifie son id. l'id sera ensuite comparé avec les autres postId ce qui permet de savoir si un post est 1er ou pas pour afficher le message "new"
+    if (sessionStorage.showFirst !== null) {
+      isFirst = sessionStorage.showFirst == post.id;
+    }
+    sessionStorage.showFirst = post.id;
+    isFirst = false;
   }
+  console.log(result.posts)
 }
 
-//fonction qui permet l'ajout d'une icone delete pour chaque article ajouté au panier
 
-
-
+//on affiche les posts
 function displayPosts(post) {
 
-  const article = document.createElement('article');
-  article.dataset.key = post.id;
-  article.classList.add('card');
-
-  const header = document.createElement('header');
-  header.classList.add('card__header', 'card__header--avatar');
-
-  const imageProfil = document.createElement('img');
-  imageProfil.setAttribute('src', './images/20456790.jpg');
-  imageProfil.setAttribute('alt', 'photo profil de l\'utilisateur');
-  imageProfil.classList.add('card__avatar');
-
-  const divPseudo = document.createElement('div');
-  divPseudo.classList.add("card__pseudo");
-  divPseudo.innerText = post.User.username;
-
-  const divTime = document.createElement('div');
-  divTime.classList.add('card__time');
-  divTime.innerText = post.createdAt;
-
-  const title = document.createElement('h2');
-  title.classList.add('card__title');
-  title.innerText = post.title;
-
-  const divBody = document.createElement('div');
-  divBody.classList.add('card__body');
-
-  let paragrapheImg = null;
-  let imageBody = null;
-  if (post.imageURL != null) {
-    paragrapheImg = document.createElement('p');
-    paragrapheImg.classList.add('para__Img');
-
-    imageBody = document.createElement('img');
-    imageBody.setAttribute('src', post.imageURL);
-    imageBody.setAttribute('alt', 'image publiée par l\'utilisateur');
-    imageBody.classList.add('card__fullWidth');
+  //s'il s'agit du tout 1er message il reçoit le message 'new'
+  let newest = '';
+  if (isFirst) {
+    newest = '<p class="new">New</p>';
   }
 
-
-  const text = document.createElement('p');
-  text.classList.add('card__text');
-  text.innerText = post.content;
-
-  const postFooter = document.createElement('footer');
-  postFooter.classList.add("card__footer");
-
-  const footerDivLike = document.createElement('div');
-  footerDivLike.classList.add('card__like');
-
-  const likeLink = document.createElement('a');
-  likeLink.setAttribute('href', '#');
-  likeLink.innerText = 120;
-  const likeIcon = document.createElement('i');
-  likeIcon.setAttribute("class", 'far fa-thumbs-up');
-
-  const footerDivDislike = document.createElement('div');
-  footerDivDislike.classList.add('card__dislike');
-
-  const dislikeLink = document.createElement('a');
-  dislikeLink.setAttribute('href', '#');
-  dislikeLink.innerText = 12;
-  const dislikeIcon = document.createElement('i');
-  dislikeIcon.setAttribute('class', 'far fa-thumbs-down');
-
-  const footerDivComment = document.createElement('div');
-  footerDivComment.id = 'card__comments';
-
-  const commentLink = document.createElement('a');
-  commentLink.setAttribute('href', './singlePost.html?id=' + post.id);
-  commentLink.innerText = 65;
-  const commentIcon = document.createElement('i');
-  commentIcon.setAttribute('class', 'far fa-comment-alt');
-
-  document.getElementById('main').append(article);
-  article.append(header, divBody, postFooter);
-  header.append(imageProfil, divPseudo, divTime, title);
-
-  if (paragrapheImg !== null) {
-    divBody.append(paragrapheImg);
-    paragrapheImg.append(imageBody);
+  let img = '';
+  if (post.imageURL !== null) {
+    img = '<p id="para__Img"><img src="' + post.imageURL + '" alt="image publiée par l\'utilisateur"></p>';
+    console.log('img:', post.imageURL)
   }
-  divBody.append(text);
-  postFooter.append(footerDivLike, footerDivDislike, footerDivComment);
-  footerDivLike.append(likeLink);
-  footerDivDislike.append(dislikeLink);
-  footerDivComment.append(commentLink);
-  likeLink.append(likeIcon);
-  dislikeLink.append(dislikeIcon);
-  commentLink.append(commentIcon);
+
+  document.getElementById('main').innerHTML +=
+    `<article class = "card" "data-key"=${post.id}>
+    ${newest}
+        <header class = "card__header card__header--avatar">
+          <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class="card__avatar">
+            <div class="card__pseudo">${post.User.username}</div>
+            <div class="card__time">${new Date(post.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" })}</div>
+            <a id="title__link" href="./singlePost.html?id=${post.id}"><h2 class="card__title">${post.title}</h2>
+            </a>
+        </header>
+        <div id ="card__body">
+          ${img}
+          <p class ="card__text">${post.content}</p>
+        </div>
+        <footer class="card__footer">
+          <div class="card__like">
+            <a href="#">120<i class="far fa-thumbs-up" aria-hidden="true"></i></a>
+          </div>
+          <div class="card__dislike">
+            <a href="#">12<i class="far fa-thumbs-down" aria-hidden="true"></i></a>
+          </div>
+          <div id="card__comments"><a href="./singlePost.html?id=${post.id}">65<i class="far fa-comment-alt" aria-hidden="true"></i></a></div>
+        </footer>
+      </article>`
+
+  const paraImg = document.getElementById('para__Img');
 
 }
-
-//faire une requete pour recupere le nombre de commentaire
-
-//creer carte en remplissant les infos
 
 /****************************gestion btn***************************/
 
+//bouton du form pour envoyer un post
 const sendPostBtn = document.getElementById("send-post-btn");
-// sendPostBtn.addEventListener('click', sendPost);
-sendPostBtn.addEventListener('click', function () {
-  sendPost("POST");
-}
-);
 
+
+sendPostBtn.addEventListener('click', function () {
+  const titleElt = document.getElementById('title');
+  const title = titleElt.value;
+
+  const contentElt = document.getElementById("content");
+  const content = contentElt.value;
+
+  if (content.lenght() == "" || title.lenght() == "") {
+
+    const formErrorCtn = document.getElementById('form-error');
+    formErrorCtn.innerText = 'Les champs ne doivent pas étre vide !'
+
+    return false;
+  }
+
+  sendPost("POST");
+});
+
+//logo bulle qui permet d'afficher ou non le formulaire permettant l'ajout d'un post
 const toggleDisplayForm = document.getElementById("add__post");
 const displayForm = document.getElementById('post');
 
@@ -222,9 +124,8 @@ toggleDisplayForm.addEventListener('click', (e) => {
   }
 })
 
-
-
 /*********************logout*****************/
+//permet la déconnection de l'user
 const logoutBtn = document.getElementById('logout');
 logoutBtn.addEventListener('click', logout)
 
@@ -232,24 +133,3 @@ function logout() {
   sessionStorage.clear();
   window.location.href = "login.html"
 }
-
-
-
-
-
-
-
-//indiqué le post id quelque part sur la carte (ex: data-id=)
-
-
-//gerer le click affichage commentaire
-//recuperer l'id du post concerné (ex: data-id)
-//faire une requete pour recuperer les commentaires du post concerné
-//affiché les comm
-
-//gerer l'ajout de commentaire
-//recuperer l'id du post concerné (ex: data-id)
-//affiché le form d'ajout
-//envoyé les infos au serveur (au click)
-//affiché a la suite le nouveau comm
-

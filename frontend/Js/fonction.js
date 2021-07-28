@@ -46,9 +46,7 @@ async function getUser(id) {
  * @param string methode 
  */
 function sendPost(methode) {
-  console.log('sendPost function')
-  // e.preventDefault();
-  // e.stopPropagation();
+
   let url = null;
 
   switch (methode) {
@@ -125,4 +123,10 @@ function sendPost(methode) {
       alert(error)
     });
   console.log("coucou");
+}
+
+
+function commentsLiList() {
+  const commentLi = document.createElement('li');
+  return commentLi
 }

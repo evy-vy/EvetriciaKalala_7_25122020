@@ -1,15 +1,25 @@
 .check-btn {
   display: flex;
-  width: 100%;
+  width: 7rem;
   height: 2rem;
   display: flex;
   justify-content: center;
+  align-self: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: lighter;
   font-size: 1.1rem;
-  background-color: #f85f6a;
-  border: #fff;
+  background-color: #ffd7d7;
+  border-right: 1px solid lightslategrey;;
+  outline: none;
   border-radius: 5px;
   padding: 20px;
-  color: #fff;
+  color: #212121;
+  // @include tablette {
+  //   width: 60%;
+  //   align-self: center;
+  // }
+  // @include big-tablette {
+  //   width: 7rem;
+  //   display: flex;
+  // }
 }

@@ -1,8 +1,29 @@
 
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#inscription,
+#connexion {
+  display: flex;
+    flex-direction: column;
+  @include tablette {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 section.login__container {
   display: flex;
   flex-direction: column;
+ @include tablette {
+   width: 80%;
+ }
+ @include big-tablette {
+   width: 45%;
+ }
 }
 
 .login__heading {
@@ -33,6 +54,11 @@ label {
 .terms__container {
   margin-top: 15px;
   font-size: 0.8rem;
+  @include tablette {
+    display: flex;
+  justify-content: center;
+  }
+  
 }
 
 .terms {

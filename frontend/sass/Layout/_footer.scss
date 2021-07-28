@@ -6,10 +6,28 @@ ul.footer {
 }
 
 .footer__container {
-  margin: 50px 0;
-  padding: 10px 0;
+  // margin-top: 50px;
+  // padding-top: 5px;
+  margin-top: 50px;
   border-top: 2px dotted lightgray;
-  position: relative;
-  bottom: 0;
+  position: absolute;
+  // bottom: 0;
   width: 100%;
+  font-size: 0.9rem;
+  padding: 10px;
+  @include tablette {
+    // bottom: 0;
+  }
+}
+
+.footer__bottom {
+  margin-top: 50px;
+  border-top: 2px dotted lightgray;
+  position: absolute;
+  // bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+  // padding: 10px;
+  padding: 40px 10px;
+  
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Asap&family=Quicksand:wght@600&display=swap" rel="stylesheet">
+  <script
+      src="https://kit.fontawesome.com/f97e8f3daf.js" crossorigin="anonymous" >
+  </script>
+  <script>
+  if (!sessionStorage.user) {
+    window.location = "./login.html";
+  }
+  </script>
+  <link rel="stylesheet" href="./css/singlePost.css"/>
+  <title>Groupomania post</title>
+</head>
+  <body>
+    <header class="header">
+      <div class="header__container">
+        <img src="./images/icon-above-font.png" alt="Logo groupomania" class="header__logo"/>
+      </div> 
+    </header>
+    <div class="forum__container">
+      <nav class="sidebar">
+        <li>
+          <a  href="forum.html" id="add__post" class="sidebar nav active">
+            <i class="fas fa-comment-dots"></i>
+          </a>
+        </li>
+        <li>
+          <a href="profil.html" class="sidebar nav">
+            <i class="fas fa-user"></i>
+          </a>
+        </li>
+        <li id="logout">
+          <a href="#" class= "sidebar nav">
+            <i class="fas fa-walking"></i>
+          </a>
+        </li>
+      </nav>
+      <form method="post" enctype="multipart/form-data" id="post">
+        <span id="form-error"></span>
+        <div class="form__container">   
+          <label for="title">Titre* :</label>
+          <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required="">
+        </div>
+        <div>
+          <label for="image">Insérez votre image :</label>
+          <input type="file" name="image" id="image" accept="image/*">
+        </div>
+        <div class="form__container">
+          <label for="content">Message* :</label>
+          <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows="10" cols="30" required=""></textarea>
+          <small id="contentWarning"></small>
+        </div>
+        <button id="send-post-btn" class="check-btn" type="submit" value="envoyer">Envoyer</button>
+      </form>
+      <main id="main">
+        <article class="card" id="article">
+          <header class="card__header card__header--avatar">
+            <div id="divIcon" class="divIcon">
+            </div>
+            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class="card__avatar">
+            <div id="card__pseudo" class="card__pseudo"></div>
+            <div id="card__time" class="card__time"></div>
+            <h2 id="card__title" class="card__title"></h2>
+          </header>
+          <div class="card__body">
+            <p id="para__Img" class="para__Img"></p>
+            <p id="card__text" class="card__text"></p>
+          </div>
+          <footer class="card__footer">
+            <div class="card__like">
+              <a href="#">120<i class="far fa-thumbs-up" aria-hidden="true"></i></a>
+            </div>
+            <div class="card__dislike">
+              <a href="#">12<i class="far fa-thumbs-down" aria-hidden="true"></i></a>
+            </div>
+            <div id="card__comments">
+              <a href="#" id="showComments">65<i class="far fa-comment-alt" aria-hidden="true"></i></a>
+            </div>
+          </footer>
+          <div id="commentsList">
+            <form method="post" id="commentsForm">
+              <textarea class="input__form" type="text" id="textComment" name="textComment" placeholder="Votre commentaire ..." row="10" cols="30" require="require"></textarea>
+              <button class="comBtn" id="comId" type="submit" value="envoyer"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            </form>
+          </div>
+        </article>
+      </main> 
+      <!-- <ul id="ulComments"></ul> -->
+    </div> 
+    <ul id="ulComments"></ul>
+      <footer class="footer__container footer__bottom">
+        <ul class="footer">
+          <li class= footer__link><a href="#">À propos</a></li>
+          <li class="dot">&middot;</li>
+          <li class= footer__link><a href="#">Mentions légales</a></li>
+          <li class="dot">&middot;</li>
+          <li class= footer__link><a href="mailto:support@groupomania.com">Support</a></li>
+        </ul>
+      </footer>
+      <script src="./Js/fonction.js"></script>
+    <script src="./Js/api.js"></script>
+    <script src="./Js/singlePost2.js"></script>
+  </body>
+</html>

@@ -114,7 +114,7 @@ exports.deleteComment = (req, res, next) => {
         res.status(200).json({ message: "Comment deleted" });
 
       } else {
-        console.log('âs autorise')
+        console.log('pas autorise')
         res.status(401).json({ message: "Unauthorized to delete this comment" });
       };
     })

@@ -11,3 +11,15 @@
     @content;
   } 
 }
+
+@mixin desktop {
+  @media screen and (min-width: map-get($desktop-breakpoints, desktop)) { 
+    @content;
+  } 
+}
+
+@mixin big-desktop {
+  @media screen and (min-width: map-get($big-desktop-breakpoints, big-desktop)) { 
+    @content;
+  } 
+}

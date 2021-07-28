@@ -23,3 +23,43 @@
   display: none;
   padding: 10px;
 }
+
+#ulComments {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.commentsLi {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  border: 3px solid lightgrey;
+  padding: 20px;
+  margin: 10px;
+  padding-right: 40px;
+  border-radius: 5px;
+  width: 90%;
+  align-self: center;
+  @include tablette {
+    width: 80%;
+  }
+  @include big-tablette {
+    width: 80%;
+  }
+  @include desktop {
+    width: 860px;
+  }
+  @include big-desktop {
+    width: 895px;
+  }
+}
+
+.comUsername {
+  position: absolute;
+  bottom: 0px;
+  right: 6px;
+  font-size: 12px;
+  color: #727272;
+  font-style: italic;
+}

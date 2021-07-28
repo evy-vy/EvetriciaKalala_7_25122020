@@ -21,13 +21,15 @@ exports.createPost = (req, res, next) => {
   console.log('userId: ', userId)
   console.log('title: ', title)
   console.log('content: ', content)
-  // console.log('image: ', image)
-  // console.log('body: ', req.body)
 
 
-  if (title.lenght === null && content.lenght === null) { //.trim à mettre en place pour éviter les espaces et les tab
+  if (title.lenght === null && content.lenght === null) {
     return res.status(400).json({ error, message: "please, fill in the blanks ! " });
   }
+
+  // if (title.value.trim() && content.value.trim() === "") {
+  //   return res.status(400).json({ error, message: "please, fill in the blanks ! " });
+  // }
 
   if (title.lenght <= title_limit || content.lenght <= content_limit) {
     return res.status(400).json({ error, message: " invalid parameters " });
@@ -111,6 +113,7 @@ exports.getOnePost = (req, res, next) => {
       }
       else {
         //pas de de post trouver -> rediriger vers le forum
+        res.status(201).json({ message: null })
       }
     })
     .catch(error => res.status(500).json({ error }))
@@ -127,7 +130,7 @@ exports.modifyPost = (req, res, post) => {
   const content = req.body.content
 
   if (!req.body.title || !req.body.content) {
-    return res.status(400).json({ error: "empty content!" });
+    return res.status(400).json({ error, message: "empty content!" });
   }
 
   models.Post.update(

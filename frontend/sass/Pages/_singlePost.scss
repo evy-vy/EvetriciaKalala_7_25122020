@@ -13,10 +13,14 @@
 #deleteCom {
   color: blue;
   cursor: pointer;
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  right: 10px;
+  // top: 24px;
+  // top: 24px;
+  // display: flex;
+  // justify-content: flex-end;
   font-size: 1rem;
-  width: 100%;
+  // width: 100%;
   &:hover {
     color: red;
   }
@@ -36,4 +40,6 @@
 .divIcon {
   display: flex;
   justify-content: flex-end;
+  padding-top: 10px;
 }
+

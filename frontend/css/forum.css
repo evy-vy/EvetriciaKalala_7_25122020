@@ -13,7 +13,7 @@ html, body, p {
 
 body {
   max-width: 100%;
-  margin: 10px 25px;
+  /*margin:10px 25px;*/
   /*background: #f1f1f1*/
 }
 
@@ -74,6 +74,7 @@ td:not([align]), th:not([align]) {
 .header__container {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .header__logo {
@@ -107,9 +108,8 @@ a {
 
 a:hover,
 a:active {
-  color: #f85f6a;
+  color: blue;
   font-weight: bold;
-  text-decoration: underline;
   transition: opacity 0.3s;
   font-weight: bold;
 }
@@ -121,6 +121,7 @@ a:active {
 @media screen and (min-width: 850px) {
   .forum__container {
     display: flex;
+    justify-content: center;
   }
 }
 
@@ -130,12 +131,18 @@ a:active {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  border-radius: 5px;
+  align-content: center;
 }
 @media screen and (min-width: 850px) {
   .sidebar {
-    width: 20%;
+    width: 15%;
+    height: 50%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    border: 1px inset lightgray;
   }
 }
 
@@ -144,6 +151,9 @@ a:active {
   align-items: center;
   padding: 0.6em 0;
   width: 100%;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  border: none;
 }
 
 .fas,
@@ -152,6 +162,9 @@ a:active {
   margin-top: -5px;
   width: 23px;
   height: 30px;
+}
+.fas:hover,
+.far:hover {
   opacity: 0.67;
   transition: opacity 0.3s;
 }
@@ -165,13 +178,25 @@ a:active {
 @media screen and (min-width: 850px) {
   #main {
     margin: 0 15px;
-    width: 100%;
+    width: 40rem;
   }
+}
+
+#title__link {
+  display: flex;
+  justify-content: center;
+}
+
+#para__Img {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  border-top: 1px solid rgba(255, 150, 157, 0.2);
 }
 
 @media screen and (min-width: 850px) {
   .aside {
-    width: 25%;
+    width: 260px;
     flex: none;
   }
 }
@@ -179,14 +204,15 @@ a:active {
 .profil {
   display: none;
 }
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 850px) {
   .profil {
     display: block;
+    width: 15rem;
   }
 }
 
 .card {
-  border: dotted 5px rgba(255, 150, 157, 0.25);
+  border: dotted 4px rgba(255, 150, 157, 0.68);
   border-radius: 6px;
   margin-bottom: 15px;
 }
@@ -196,11 +222,15 @@ a:active {
 .card__header--avatar {
   position: relative;
   padding-left: 65px;
+  margin-top: -5px;
+}
+.card__pseudo {
+  font-weight: bold;
 }
 .card__avatar {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 48%;
   position: absolute;
   top: 50%;
   left: 10px;
@@ -208,35 +238,44 @@ a:active {
 }
 .card__title {
   font-weight: bold;
-  font-size: 1.3rem;
-  color: #000;
-  margin: 5px 0;
+  font-size: 1.1rem;
+  color: rgba(43, 43, 43, 0.65);
   display: flex;
   justify-content: center;
   text-decoration: underline;
 }
 .card__text {
   line-height: 1.2rem;
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px;
+  border-top: solid 1px rgba(255, 150, 157, 0.2);
+  border-bottom: solid 1px rgba(255, 150, 157, 0.2);
 }
 .card__time {
   color: rgba(0, 0, 0, 0.38);
   font-size: 12px;
+  margin-top: 3px;
 }
 .card__body {
   padding: 0 10px 10px 10px;
 }
 .card__footer {
-  border-top: dotted 5px rgba(255, 150, 157, 0.25);
-  border-bottom: dotted 5px rgba(255, 150, 157, 0.25);
   display: flex;
   padding: 10px;
   font-size: 14px;
 }
 
+@media screen and (min-width: 850px) {
+  .single__card {
+    width: 75%;
+  }
+}
+
 .aside__card {
-  border: 1px solid black;
+  border: 1px outset lightslategrey;
   border-radius: 3px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .aside__card__header {
   padding: 10px;
@@ -274,6 +313,7 @@ a:active {
 .new {
   display: flex;
   justify-content: flex-end;
+  padding-right: 15px;
 }
 
 .sidebar__title {
@@ -320,7 +360,7 @@ a:active {
 
 .fa-user-plus {
   margin-right: 5px;
-  color: #34aaff;
+  color: blue;
   font-size: 20px;
 }
 
@@ -345,15 +385,6 @@ a:active {
 
 .card_last_child {
   margin-bottom: 0;
-}
-
-.commentsLi {
-  display: flex;
-  justify-content: flex-start;
-  border: 3px solid lightgrey;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 5px;
 }
 
 #post {
@@ -392,7 +423,7 @@ textarea.error {
 
 #send-post-btn {
   border: 1px outset #00c895;
-  background-color: #00c895;
+  background-color: #84edd2;
   padding: 3px;
   border-radius: 2px;
   cursor: pointer;
@@ -407,12 +438,20 @@ ul.footer {
 }
 
 .footer__container {
-  margin: 50px 0;
-  padding: 10px 0;
+  margin-top: 50px;
   border-top: 2px dotted lightgray;
-  position: relative;
-  bottom: 0;
+  position: absolute;
   width: 100%;
+  font-size: 0.9rem;
+  padding: 10px;
+}
+.footer__bottom {
+  margin-top: 50px;
+  border-top: 2px dotted lightgray;
+  position: absolute;
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 40px 10px;
 }
 
 /*# sourceMappingURL=forum.css.map */
