@@ -63,7 +63,6 @@ function displayPosts(post) {
     img = '<p id="para__Img"><img src="' + post.imageURL + '" alt="image publiée par l\'utilisateur"></p>';
     console.log('img:', post.imageURL)
   }
-
   document.getElementById('main').innerHTML +=
     `<article class = "card" "data-key"=${post.id}>
     ${newest}
@@ -80,12 +79,12 @@ function displayPosts(post) {
         </div>
         <footer class="card__footer">
           <div class="card__like">
-            <a href="#">120<i class="far fa-thumbs-up" aria-hidden="true"></i></a>
+            <a href="#"><i class="far fa-thumbs-up" aria-hidden="true"></i></a>
           </div>
           <div class="card__dislike">
-            <a href="#">12<i class="far fa-thumbs-down" aria-hidden="true"></i></a>
+            <a href="#"><i class="far fa-thumbs-down" aria-hidden="true"></i></a>
           </div>
-          <div id="card__comments"><a href="./singlePost.html?id=${post.id}">65<i class="far fa-comment-alt" aria-hidden="true"></i></a></div>
+          <div id="card__comments"><a href="./singlePost.html?id=${post.id}"><i class="far fa-comment-alt" aria-hidden="true"></i></a></div>
         </footer>
       </article>`
 
@@ -112,7 +111,7 @@ sendPostBtn.addEventListener('click', function () {
 
     return false;
   }
-
+  console.log("1")
   sendPost("POST");
 });
 

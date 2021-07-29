@@ -37,7 +37,6 @@ function getUserPost(id) {
 async function getOnePost() {
   const thisPost = await getSinglePost();
 
-  console.log('post: ', thisPost)
   const post = thisPost.message;
 
   if (post === null) {
@@ -50,6 +49,7 @@ async function getOnePost() {
 }
 
 const comList = commentsLiList();
+
 function displayThisPost(post, userPost) {
 
   const article = document.getElementById('article');
@@ -162,7 +162,6 @@ function displayThisPost(post, userPost) {
     commentBtn.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('click btn');
 
       let contentElt = document.getElementById('textComment');
       let content = contentElt.value;
@@ -179,7 +178,6 @@ function displayThisPost(post, userPost) {
 
 
     if (imageBody !== null) {
-      console.log('ici')
       paragrapheImg.append(imageBody);
     }
 
@@ -224,7 +222,7 @@ sendPostUpdateBtn.addEventListener('click', function (e) {
   if (comment.trim() == "") {
 
     const formErrorCtn = document.getElementById('form-error');
-    formErrorCtn.innerText = 'Les champs ne doivent pas étre vide !';
+    formErrorCtn.innerText = 'Les champs ne doivent pas être vide !';
 
     return false;
   }
@@ -234,7 +232,6 @@ sendPostUpdateBtn.addEventListener('click', function (e) {
 
 //recup des com ayant un postId similaire au post
 function comments() {
-  console.log(getCurrentToken())
   return fetch(api('comment') + postId, {
     method: "GET",
     headers: {
@@ -243,7 +240,6 @@ function comments() {
     }
   })
     .then(response => {
-      console.log('return return:', response)
       return response.json()
     })
     .catch(error => {
@@ -254,9 +250,7 @@ function comments() {
 // recup des commentaires;
 async function allComments() {
   const allComments = await comments();
-  console.log(allComments);
   for (oneComment of allComments.comments) {
-    console.log(oneComment);
 
     displayComments(oneComment);
   }
@@ -266,16 +260,14 @@ allComments();
 
 //affichage des com
 function displayComments(oneComment) {
+
   //on vérifie si l'user est admin ou si son id est = au com pour donner acces a la suppression ou non 
   let userId = getCurrentUserId();
   getUser(userId)
     .then(user => {
-      console.log('user id admin? ')
       let comList2 = commentsLiList();
       const comsUsername = document.createElement('span');
       let deleteComsIcon = null;
-      console.log('userid: ', user.id)
-      console.log('oneComment: ', oneComment.userId)
       if (user.isAdmin || user.id == oneComment.userId) {
         deleteComsIcon = document.createElement('i');
         deleteComsIcon.classList.add('fas', 'fa-times-circle');
@@ -294,10 +286,8 @@ function displayComments(oneComment) {
 
         const userId = getCurrentUserId();
         const token = getCurrentToken();
-        console.log('token: ', token)
         getUser(getCurrentUserId()).then(response => {
           let user = response;
-          console.log('user: ', user)
 
           const info = {
             isAdmin: user.isAdmin,
@@ -315,7 +305,6 @@ function displayComments(oneComment) {
             body: JSON.stringify(info)
           })
             .then(response => {
-              console.log(info);
               window.location.reload();
               response.json();
             })
@@ -351,12 +340,10 @@ function displayComments(oneComment) {
 async function sendCom(post) {
 
   const postId = post.id;
-  console.log('id: ', postId)
   const userId = getCurrentUserId();
   const commentElt = document.getElementById('textComment');
   const comment = commentElt.value;
 
-  console.log("comment: ", comment);
 
   let headers = {
     "authorization": "Bearer " + getCurrentToken(),
@@ -370,7 +357,6 @@ async function sendCom(post) {
     comment: comment
   })
 
-  console.log('body: ', body)
   //envoyer les données
   fetch(api("comment"), {
     method: "POST",
@@ -379,7 +365,6 @@ async function sendCom(post) {
 
   })
     .then(response => {
-      console.log('ici2');
       window.location.reload();
     })
     .catch(error => {

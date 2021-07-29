@@ -93,7 +93,6 @@ const checkForSubmit = (form) => {
 
   if (isValid) {
     sendData(form);
-    alert('datas ok')
   }
 
   function sendData() {

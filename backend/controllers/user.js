@@ -229,39 +229,40 @@ exports.updateUser = (req, res, next) => {
 * puis suppression. 
 */
 exports.deleteUser = (req, res, next) => {
-
   console.log('id: ', req.params.id)
   models.User.findOne({
     where: { id: req.params.id }
-  })
-    .then(user => {
-      bcrypt.compare(req.body.password, user.password)
+  }).then(user => {
 
-        .then(valid => {
-          if (!valid) {
-            res.status(400).json({ error, message: "wrong password !" });
-          } else {
-            models.User.destroy({
-              where: { id: req.params.id }
-            })
-              .then(() => {
-                res.status(200).json(
-                  { message: 'delete successfully !' }
-                );
-              })
-              .catch(error => {
-                res.status(500).json({ error });
-                console.log('erreur a la suppression: ', error)
-              })
-          }
+    bcrypt.compare(req.body.password, user.password).then(valid => {
+      if (valid) {
+        models.Comment.destroy({
+          where: { userId: req.params.id }
+        }).catch(error => {
+          res.status(500).json({ error });
+          console.log('erreur a la suppression des commentaires: ', error)
         })
-        .catch(error => {
-          res.status(400).json({ message: "pass control error", error })
-        }
-        );
-    })
-    .catch(error => {
 
-      res.status(500).json({ error })
-    });
+        models.Post.destroy({
+          where: { userId: req.params.id }
+        }).catch(error => {
+          res.status(500).json({ error });
+          console.log('erreur a la suppression des postes: ', error)
+        })
+
+        models.User.destroy({
+          where: { id: req.params.id }
+        }).catch(error => {
+          res.status(500).json({ error });
+          console.log('erreur a la suppression des postes: ', error)
+        })
+
+        res.status(200).json({ message: "Delete done !" })
+      } else {
+        res.status(400).json({ message: "wrong password !" });
+      }
+    })
+  }).catch(error => {
+    res.status(500).json({ error })
+  });
 };

@@ -45,7 +45,6 @@ async function getUser(id) {
  * @param string methode 
  */
 function sendPost(methode) {
-
   let url = null;
 
   switch (methode) {
@@ -84,13 +83,15 @@ function sendPost(methode) {
     formData.append('content', content);
     body = formData;
   } else {
+
     headers["Content-Type"] = "application/json"
     body = JSON.stringify({
       userId: userId,
       title: title,
       content: content
     });
-
+    console.log(body)
+    console.log("URL => " + url)
   }
 
   //envoyer les données
