@@ -35,7 +35,9 @@ async function userById() {
 
 userById();
 
+
 function displayUserById(userValues) {
+  let date = new Date(userValues.user.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" });
   const username = document.createElement('p')
   username.classList.add('profil__userame');
   username.innerHTML = "<span class='paragraphColor'>Pseudo : </span>" + userValues.user.username;
@@ -50,7 +52,7 @@ function displayUserById(userValues) {
 
   const createdAt = document.createElement('p')
   createdAt.classList.add('profil__creation');
-  createdAt.innerHTML = "<span class='paragraphColor'>Date de creation : </span>" + userValues.user.createdAt.slice(2, 10);
+  createdAt.innerHTML = "<span class='paragraphColor'>Date de creation :</span>" + date;
 
   const updatedAt = document.createElement('p')
   updatedAt.classList.add('profil__update');

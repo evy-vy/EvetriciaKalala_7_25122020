@@ -29,12 +29,6 @@ function getPosts() {
 //on récupère chaque post dans l'array de posts
 async function getAllPosts() {
   const result = await getPosts();
-  // if(result.posts.length > 0) {
-  //   .style.display = 'none';
-  // } else {
-  //   .style.display = 'block';
-  // }
-  // result.posts.length > 0 -> mettre display none a ton img
 
   for (post of result.posts) {
     displayPosts(post);
@@ -45,7 +39,6 @@ async function getAllPosts() {
     sessionStorage.showFirst = post.id;
     isFirst = false;
   }
-  console.log(result.posts)
 }
 
 
@@ -61,7 +54,6 @@ function displayPosts(post) {
   let img = '';
   if (post.imageURL !== null) {
     img = '<p id="para__Img"><img src="' + post.imageURL + '" alt="image publiée par l\'utilisateur"></p>';
-    console.log('img:', post.imageURL)
   }
   document.getElementById('main').innerHTML +=
     `<article class = "card" "data-key"=${post.id}>
@@ -111,7 +103,6 @@ sendPostBtn.addEventListener('click', function () {
 
     return false;
   }
-  console.log("1")
   sendPost("POST");
 });
 

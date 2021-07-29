@@ -283,6 +283,10 @@ label {
   color: #f88918;
 }
 
+#form-error {
+  color: red;
+}
+
 .error {
   display: flex;
   flex-direction: column;

@@ -34,9 +34,7 @@ function getUserAction(id) {
 }
 
 async function getUser(id) {
-  console.log('getCurrentUser')
   let result = await getUserAction(id);
-  console.log(result)
   return result.user;
 }
 
@@ -74,7 +72,6 @@ function sendPost(methode) {
 
   let body = '';
   if (image) {
-    console.log('image ok')
     const formData = new FormData();
     formData.append('image', image);
 
@@ -90,8 +87,6 @@ function sendPost(methode) {
       title: title,
       content: content
     });
-    console.log(body)
-    console.log("URL => " + url)
   }
 
   //envoyer les données
@@ -110,7 +105,6 @@ function sendPost(methode) {
     .catch(error => {
       alert(error)
     });
-  console.log("coucou");
 }
 
 
