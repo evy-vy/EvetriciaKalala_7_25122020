@@ -235,6 +235,7 @@ async function deleteUser(password) {
 
 }
 
+
 const logoutBtn = document.getElementById('logout');
 logoutBtn.addEventListener('click', logout)
 

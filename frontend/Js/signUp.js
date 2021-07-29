@@ -77,7 +77,6 @@ form.addEventListener('submit', (e) => {
 
 //Soumission du formulaire. On met l'écouteur d'évènement directement sur le form et on écoute l'évènement.
 const checkForSubmit = (form) => {
-  // console.log('coucou');
   const fields = [
     {
       "type": "email",
@@ -93,11 +92,9 @@ const checkForSubmit = (form) => {
       "value": form.elements["password"].value
     }
   ];
-  // console.log('je suis la')
   let isValid = false;
 
   fields.forEach((data) => {
-    // console.log('et la aussi');
     //on parcours notre tableaux de champs, et on execute notre fonction de vérification
     isValid = verifInput(data["value"], data["type"]);
     if (!isValid) { //si isValid est false on sort de la boucle
@@ -108,7 +105,7 @@ const checkForSubmit = (form) => {
   //si tous les champs sont bons isValid sera égal a true
   if (isValid) {
     sendData(form);
-    alert("inscription ok");
+
   }
 
   function sendData() {

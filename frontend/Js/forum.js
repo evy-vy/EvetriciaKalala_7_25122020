@@ -29,7 +29,6 @@ function getPosts() {
 //on récupère chaque post dans l'array de posts
 async function getAllPosts() {
   const result = await getPosts();
-
   // if(result.posts.length > 0) {
   //   .style.display = 'none';
   // } else {
@@ -39,7 +38,7 @@ async function getAllPosts() {
 
   for (post of result.posts) {
     displayPosts(post);
-    //On verifie s'il y a un élément dans le localstorage, si oui on verifie son id. l'id sera ensuite comparé avec les autres postId ce qui permet de savoir si un post est 1er ou pas pour afficher le message "new"
+    //On verifie s'il y a un élément dans le localstorage, si oui on verifie son id. l'id sera ensuite comparé avec les autres postId ce qui permet de savoir si un post est 1er ou pas pour afficher le message "new"    
     if (sessionStorage.showFirst !== null) {
       isFirst = sessionStorage.showFirst == post.id;
     }
@@ -52,8 +51,6 @@ async function getAllPosts() {
 
 //on affiche les posts
 function displayPosts(post) {
-  // console.log(post.User.username)
-
 
   //s'il s'agit du tout 1er message il reçoit le message 'new'
   let newest = '';
