@@ -9,45 +9,29 @@ const content_limit = 4;
 //routes 
 
 //create a post
-
 exports.createPost = (req, res, next) => {
-
 
   const userId = req.body.userId;
   const title = req.body.title;
   const content = req.body.content;
   const image = req.file;
 
-  console.log('userId: ', userId)
-  console.log('title: ', title)
-  console.log('content: ', content)
-
-
   if (title.lenght === null && content.lenght === null) {
     return res.status(400).json({ error, message: "please, fill in the blanks ! " });
   }
-
-  // if (title.value.trim() && content.value.trim() === "") {
-  //   return res.status(400).json({ error, message: "please, fill in the blanks ! " });
-  // }
 
   if (title.lenght <= title_limit || content.lenght <= content_limit) {
     return res.status(400).json({ error, message: " invalid parameters " });
   }
 
   models.User.findOne({
-    // attributes: ['email', 'username'],
     where: { id: userId }
   })
     .then((user) => {
-      // console.log('ahah');
       if (!user) {
-        // console.log('pooooooooooo');
         return res.status(404).json({ message: "user not found", error });
       }
-      // console.log(user);
       if (req.file) {
-        console.log('file ok')
         models.Post.create({
           title: title,
           content: content,
@@ -55,28 +39,20 @@ exports.createPost = (req, res, next) => {
           UserId: user.id
         })
       } else {
-        console.log('file pas ok')
         models.Post.create({
           title: title,
           content: content,
           UserId: user.id,
         })
       };
-      // console.log('123');
     })
     .then(() => res.status(201).json({ message: 'post created ! ' })
     )
     .catch(error => res.status(404).json({ error }));
-
-  /*A verifier : il est possible d'envoyer des messages meme quand le contenu et/ou le titre est vide 
-  * renvoi une erreur 401 avec demande auth dans route.
-  */
 };
 
-//get all posts a revoir
-
+//get all posts 
 exports.getAllPost = (req, res, next) => {
-  console.log('coucou');
   models.Post.findAll({
     include: [{
       model: models.User,
@@ -85,12 +61,9 @@ exports.getAllPost = (req, res, next) => {
     order: [['createdAt', 'DESC']]
   })
     .then(posts => {
-      console.log(posts);
       if (!posts) {
-        console.log('ici');
         return res.status(404).json({ error: 'empty' })
       } else {
-        console.log('et la');
         return res.status(200).json({ posts })
       }
     })
@@ -105,14 +78,10 @@ exports.getOnePost = (req, res, next) => {
     where: { id: id }
   })
     .then((post) => {
-      console.log(id);
-      console.log('post: ', post)
       if (post) {
         res.status(201).json({ message: post })
-        // res.render('test', { message: post })
       }
       else {
-        //pas de de post trouver -> rediriger vers le forum
         res.status(201).json({ message: null })
       }
     })
@@ -121,8 +90,6 @@ exports.getOnePost = (req, res, next) => {
 
 
 //update a post 
-//TODO = .trim
-
 exports.modifyPost = (req, res, post) => {
 
   const id = req.params.id;
@@ -146,22 +113,29 @@ exports.modifyPost = (req, res, post) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-
-//delete a retravailler (voir pour admin)
+//delete
 exports.deletePost = (req, res, next) => {
+  const currentUserId = req.body.currentUserId;
+  const isAdmin = req.body.isAdmin;
   const id = req.params.id;
 
-  //bouchon
-  const isAdmin = false; /* ex: localstorage.curentUser.isAdmin */
-  const currentUser = 1; /* ex: localstorage.curentUser.id */
 
+
+  console.log('isAdmin: ', isAdmin)
+  console.log('currentUserId: ', currentUserId)
   models.Post.destroy({
     where: { id: id }
   })
-    .then(() =>
-      res.status(200).json(
-        { message: "successfully deleted! " })
-    )
+    .then(() => {
+      if (isAdmin || currentUserId == post.userId) {
+        console.log(' autorise')
+        res.status(200).json(
+          { message: "successfully deleted! " });
+      } else {
+        console.log('pas autorise')
+        res.status(401).json({ message: "Unauthorized to delete this comment" });
+      };
+    })
     .catch(error => res.status(500).json(
       { error })
     );

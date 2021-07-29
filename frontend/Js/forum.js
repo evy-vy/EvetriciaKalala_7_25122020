@@ -29,6 +29,14 @@ function getPosts() {
 //on récupère chaque post dans l'array de posts
 async function getAllPosts() {
   const result = await getPosts();
+
+  // if(result.posts.length > 0) {
+  //   .style.display = 'none';
+  // } else {
+  //   .style.display = 'block';
+  // }
+  // result.posts.length > 0 -> mettre display none a ton img
+
   for (post of result.posts) {
     displayPosts(post);
     //On verifie s'il y a un élément dans le localstorage, si oui on verifie son id. l'id sera ensuite comparé avec les autres postId ce qui permet de savoir si un post est 1er ou pas pour afficher le message "new"
@@ -44,6 +52,8 @@ async function getAllPosts() {
 
 //on affiche les posts
 function displayPosts(post) {
+  // console.log(post.User.username)
+
 
   //s'il s'agit du tout 1er message il reçoit le message 'new'
   let newest = '';
@@ -98,8 +108,7 @@ sendPostBtn.addEventListener('click', function () {
 
   const contentElt = document.getElementById("content");
   const content = contentElt.value;
-
-  if (content.lenght() == "" || title.lenght() == "") {
+  if (content.trim() == "" || title.trim() == "") {
 
     const formErrorCtn = document.getElementById('form-error');
     formErrorCtn.innerText = 'Les champs ne doivent pas étre vide !'

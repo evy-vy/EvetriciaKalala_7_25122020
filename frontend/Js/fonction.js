@@ -21,7 +21,6 @@ function getUserAction(id) {
   return fetch(api('url') + id, {
     method: "GET",
     headers: {
-      // Authorization: "Bearer " + getCurrentToken(),
       Accept: 'application/json'
     }
   })
@@ -61,14 +60,7 @@ function sendPost(methode) {
   }
 
 
-
-  // const article = document.getElementById('article');
-  // let postId = article.dataset.key;
-
-  // console.log('postId: ', postId)
-
   const userId = getCurrentUserId();
-  // const token = user.token;
   let image = document.getElementById('image').files[0];
   const titleElt = document.getElementById('title');
   const title = titleElt.value;
@@ -102,20 +94,15 @@ function sendPost(methode) {
   }
 
   //envoyer les données
-  // fetch(api("post") + postId, {
   fetch(url, {
     method: methode,
     headers: headers,
     body: body
   })
     .then(response => {
-      console.log('ici2');
-      // displayForm.style.display = "none";
 
       const form = document.getElementById('post');
-
       form.style.display = "none";
-
       window.location.reload();
 
     })

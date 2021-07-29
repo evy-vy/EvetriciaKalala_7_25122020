@@ -14,10 +14,12 @@ ul.footer {
   // bottom: 0;
   width: 100%;
   font-size: 0.9rem;
-  padding: 10px;
-  @include tablette {
+  padding: 40px 10px;
+
+  // padding: 10px;
+  // @include tablette {
     // bottom: 0;
-  }
+  
 }
 
 .footer__bottom {

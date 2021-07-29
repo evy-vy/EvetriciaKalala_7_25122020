@@ -2,9 +2,6 @@
   display: flex;
   justify-content: center;
   margin: 10px;
-  @include tablette {
-    // margin-top: 10px;
-  }
 }
 
 #textComment {
@@ -62,4 +59,10 @@
   font-size: 12px;
   color: #727272;
   font-style: italic;
+}
+
+#form-comment-error {
+  color: red;
+  display: flex;
+  justify-content: center;
 }

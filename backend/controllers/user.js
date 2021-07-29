@@ -1,4 +1,4 @@
-
+// 
 //Logique métier appliquées aux routes utilisateurs
 
 require('dotenv').config();
@@ -133,14 +133,16 @@ exports.login = (req, res, next) => {
 };
 
 
-//renvoi l'utilisateur sélectionnée grace à son id
+/**
+ * GET : Permet d'afficher 1 utilisateur
+ * renvoi l'utilisateur sélectionnée grace à son id
+*/
 
 exports.getUserProfile = (req, res, next) => {
 
   const id = req.params.id;
 
   models.User.findOne({
-    // attributes: ['username', 'email'],
     where: { id: id }
   })
     .then((user) => {
@@ -153,14 +155,15 @@ exports.getUserProfile = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-// update profile
 
+/**
+ * PUT : Permet la modification du MDP
+ * On retrouve le user par son id 
+*/
 exports.updateUser = (req, res, next) => {
   const id = req.params.id;
   const newPassword = req.body.newPassword;
   const password = req.body.password;
-
-  // console.log('A:', newPassword);
 
   if (checkPassword(newPassword)) {
     models.User.findOne({
@@ -195,14 +198,11 @@ exports.updateUser = (req, res, next) => {
 
                     models.User.update(values, condition)
                       .then(result => {
-                        console.log('result')
                         res.status(201).json({ message: result + ' data updated' })
                       })
                       .catch(error => res.status(500).json({ error }))
                   })
-                console.log('pass: ', newPassword)
               } else {
-                console.log('meme mdp')
                 res.status(400).json({ message: "Same password: you cannot have same password as above !" })
               };
             })
@@ -210,7 +210,6 @@ exports.updateUser = (req, res, next) => {
           else {
             res.status(400).json({ message: "Wrong Password, please try again" })
           }
-
         });
       })
       .catch(error => res.status(404).json({ message: "User not found", error }))
@@ -236,7 +235,6 @@ exports.deleteUser = (req, res, next) => {
     where: { id: req.params.id }
   })
     .then(user => {
-      console.log('tes1:', user.password);
       bcrypt.compare(req.body.password, user.password)
 
         .then(valid => {
@@ -253,7 +251,7 @@ exports.deleteUser = (req, res, next) => {
               })
               .catch(error => {
                 res.status(500).json({ error });
-                console.log('erreur a la suppression')
+                console.log('erreur a la suppression: ', error)
               })
           }
         })

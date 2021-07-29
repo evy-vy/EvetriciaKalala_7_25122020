@@ -28,7 +28,8 @@
       <nav class="sidebar">
         <li>
           <a  href="forum.html" id="add__post" class="sidebar nav active">
-            <i class="fas fa-comment-dots"></i>
+            <!-- <i class="fas fa-comment-dots"></i> -->
+            <i class="fas fa-angle-double-left"></i>
           </a>
         </li>
         <li>
@@ -46,7 +47,7 @@
         <span id="form-error"></span>
         <div class="form__container">   
           <label for="title">Titre* :</label>
-          <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required>
+          <input type="text" value="" placeholder="Votre titre" name="title" id="title" minlength="2" required="">
         </div>
         <div>
           <label for="image">Insérez votre image :</label>
@@ -54,15 +55,45 @@
         </div>
         <div class="form__container">
           <label for="content">Message* :</label>
-          <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows= "10" cols="30" required ></textarea>
+          <textarea class="form-control input__form" type="text" id="content" name="content" placeholder="Saisissez votre message" rows="10" cols="30" required=""></textarea>
           <small id="contentWarning"></small>
         </div>
-        <button id="send-post-btn" class= "check-btn" type="submit" value="envoyer">Envoyer</button>
-      </form> 
+        <button id="send-post-btn" class="check-btn" type="submit" value="envoyer">Envoyer</button>
+      </form>
       <main id="main">
-        
+        <article class="card" id="article">
+          <header class="card__header card__header--avatar">
+            <div id="divIcon" class="divIcon">
+            </div>
+            <img src="./images/20456790.jpg" alt="photo profil de l'utilisateur" class="card__avatar">
+            <div id="card__pseudo" class="card__pseudo"></div>
+            <div id="card__time" class="card__time"></div>
+            <h2 id="card__title" class="card__title"></h2>
+          </header>
+          <div class="card__body">
+            <p id="para__Img" class="para__Img"></p>
+            <p id="card__text" class="card__text"></p>
+          </div>
+          <footer class="card__footer">
+            <div class="card__like">
+              <a href="#">120<i class="far fa-thumbs-up" aria-hidden="true"></i></a>
+            </div>
+            <div class="card__dislike">
+              <a href="#">12<i class="far fa-thumbs-down" aria-hidden="true"></i></a>
+            </div>
+            <div id="card__comments">
+              <a href="#" id="showComments">65<i class="fas fa-pen-fancy"></i></a>
+            </div>
+          </footer>
+          <div id="commentsList">
+            <form method="post" id="commentsForm">
+              <textarea class="input__form" type="text" id="textComment" name="textComment" placeholder="Votre commentaire ..." row="10" cols="30" require="require"></textarea>
+              <button class="comBtn" id="comId" type="submit" value="envoyer"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            </form>
+            <span id="form-comment-error"></span>
+          </div>
+        </article>
       </main> 
-      <!-- <ul id="ulComments"></ul> -->
     </div> 
     <ul id="ulComments"></ul>
       <footer class="footer__container footer__bottom">

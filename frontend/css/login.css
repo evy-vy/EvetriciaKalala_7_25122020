@@ -12,9 +12,7 @@ html, body, p {
 }
 
 body {
-  max-width: 100%;
-  /*margin:10px 25px;*/
-  /*background: #f1f1f1*/
+  max-width: 98%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -203,6 +201,43 @@ label {
   color: #f88918;
 }
 
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.img404 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 64px;
+}
+
+.title404 {
+  position: absolute;
+  z-index: 1;
+  top: 55px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#button404 {
+  z-index: 1;
+  position: relative;
+  top: -43px;
+  left: -161px;
+  padding: 10px;
+  width: 162px;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+#button404 :hover {
+  color: orange;
+}
+
 .check-btn {
   display: flex;
   width: 7rem;
@@ -233,8 +268,9 @@ ul.footer {
   position: absolute;
   width: 100%;
   font-size: 0.9rem;
-  padding: 10px;
+  padding: 40px 10px;
 }
+
 .footer__bottom {
   margin-top: 50px;
   border-top: 2px dotted lightgray;

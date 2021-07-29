@@ -180,6 +180,8 @@ const checkForSubmit = (form) => {
       })
         .then(response => {
           modify.style.display = "none";
+          let infoElt = document.getElementById('info');
+          infoElt.innerText = "Modification effectué"
           return response.json
         })
         .catch(error => {
@@ -222,6 +224,9 @@ async function deleteUser(password) {
   })
     .then(result => {
       remove.style.display = "none";
+      let passwordWarning = document.getElementById('passwordWarning');
+      passwordWarning.innerText = "compte supprimé";
+      window.location.href = 'index.html';
       return result.json()
     })
     .catch(error => {

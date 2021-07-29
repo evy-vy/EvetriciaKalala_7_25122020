@@ -46,9 +46,25 @@ a:active {
 #remove {
   display: none;
   align-self: center;
-  width: 20rem;
+  width: 75%;
   justify-content: center;
   align-items: center;
+  @include tablette {
+    width: 50%;
+  }
+  @include desktop {
+    width: 40%;
+  }
+  @include big-desktop {
+    width: 30%;
+  }
+}
+
+#info {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  color: green;
 }
 
 main {
