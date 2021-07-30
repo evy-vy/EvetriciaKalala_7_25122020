@@ -48,7 +48,7 @@ exports.signup = async (req, res, next) => {
   if (checkMail(email) === true && checkUsername(username) === true && checkPassword(password) === true) {
 
     models.User.findOne({
-      where: { email: email, username: username, password: password }
+      where: { username: username }
     })
       .then(user => {
         if (!user) {
@@ -67,7 +67,7 @@ exports.signup = async (req, res, next) => {
             })
             .catch(error => res.status(500).json({ error }));
         } else {
-          return res.status(409).json({ error: 'user already exist ' });
+          return res.status(409).json({ error: 'user already exist' });
         }
       })
       .catch(error => res.status(401).json({ error }));
@@ -189,12 +189,12 @@ exports.updateUser = (req, res, next) => {
                       .catch(error => res.status(500).json({ error }))
                   })
               } else {
-                res.status(400).json({ message: "Same password: you cannot have same password as above !" })
+                res.status(400).json({ message: "Same password: you cannot have same password as above !", code: "413" })
               };
             })
           }
           else {
-            res.status(400).json({ message: "Wrong Password, please try again" })
+            res.status(400).json({ message: "Wrong Password, please try again", code: "412" })
           }
         });
       })
@@ -240,7 +240,7 @@ exports.deleteUser = (req, res, next) => {
 
         res.status(200).json({ message: "Delete done !" })
       } else {
-        res.status(400).json({ message: "wrong password !" });
+        res.status(400).json({ message: "wrong password !", code: "414" });
       }
     })
   }).catch(error => {
