@@ -44,7 +44,7 @@ const verifInput = (value, type, element) => {
       regExp = new RegExp('^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}');
       break;
     case 'string':
-      regExp = new RegExp("^[0-9a-zA-Z-@_]{4,10}");
+      regExp = new RegExp("^[0-9a-zA-Z-@_]{2,10}");
       break;
     case 'password':
       regExp = new RegExp('^[0-9a-zA-Z-+!*@%_]{8,15}');;
@@ -133,7 +133,13 @@ const checkForSubmit = (form) => {
       body: JSON.stringify(post)
     })
       .then(response => response.json())
-      .then(() => {
+      .then((result) => {
+        if (result.error == 'user already exist') {
+          let errorElt = document.getElementById("error-signup");
+          errorElt.innerText = "Ce pseudo est déja utilisé !";
+          errorElt.style.color = "red";
+          return false;
+        }
         window.location.href = "./login.html";
       })
       .catch(error => {

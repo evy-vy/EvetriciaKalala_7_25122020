@@ -1,4 +1,3 @@
-
 if (!sessionStorage.user) {
   window.location.href = "login.html";
 }
@@ -182,16 +181,32 @@ const checkForSubmit = (form) => {
         })
       })
         .then(response => {
-          let infoElt = document.getElementById('info');
-          if (password.value === modifyPassword.value) {
-            modify.style.display = "none";
-            infoElt.innerText = "Modification effectué"
-          } else {
-            modify.style.display = "none";
-            infoElt.style.color = "red";
-            infoElt.innerText = "Erreur d'authentification !"
-          }
-          return response.json
+          console.log(response);
+
+          // modify.style.display = "none";
+          // let infoElt = document.getElementById('info');
+          // infoElt.innerText = "Modification effectué"
+          return response.json().then(
+            response => {
+
+              modify.style.display = "none";
+              let infoElt = document.getElementById('info');
+
+              if (response.code == "412") {
+
+                infoElt.innerText = 'Mauvais mot passe !';
+                return false;
+
+              }
+              else if (response.code == "413") {
+                infoElt.innerText = 'Il ne faut pas utilisé le meme mot de passe !';
+                return false;
+              }
+
+              infoElt.innerText = "Modification effectué"
+
+            });
+
         })
         .catch(error => {
           alert(error)
@@ -209,11 +224,11 @@ const deleteBtn = document.getElementById('deleteUser');
 const deletePassword = document.getElementById('deletPassword');
 
 deleteBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  e.stopPropagation();
 
   let password = deletePassword.value;
+
   deleteUser(password);
+
 });
 
 async function deleteUser(password) {
@@ -232,11 +247,15 @@ async function deleteUser(password) {
     })
   })
     .then(result => {
-      remove.style.display = "none";
-      let infoElt = document.getElementById('info');
-      infoElt.innerText = "compte supprimé";
-      window.location.href = 'index.html';
-      return result.json()
+      let passwordWarning = document.getElementById('info');
+      return result.json().then(response => {
+        if (response.code == "414") {
+          passwordWarning.innerText = "Mauvais mot de passe!";
+          passwordWarning.style.color = "red";
+          return false;
+        }
+        window.location.href = 'index.html';
+      })
     })
     .catch(error => {
       alert(error)

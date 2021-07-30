@@ -35,7 +35,7 @@ const verifInput = (value, type, element) => {
   switch (type) {
 
     case 'string':
-      regExp = new RegExp("^[0-9a-zA-Z-@_]{4,10}");
+      regExp = new RegExp("^[0-9a-zA-Z-@_]{2,10}");
       break;
     case 'password':
       regExp = new RegExp('^[0-9a-zA-Z-+!*@%_]{8,15}');;
