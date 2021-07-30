@@ -13,8 +13,10 @@ function getId() {
 
 function getSinglePost() {
   const postId = getId();
-  const user = JSON.parse(sessionStorage.user);
-  const token = user.token;
+  const user = getCurrentUserId();
+  // const user = JSON.parse(sessionStorage.user);
+  const token = getCurrentToken();
+  // const token = user.token;
   return fetch(api('post') + postId, {
     method: "GET",
     headers: {

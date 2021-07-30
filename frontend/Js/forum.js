@@ -99,7 +99,7 @@ sendPostBtn.addEventListener('click', function () {
   if (content.trim() == "" || title.trim() == "") {
 
     const formErrorCtn = document.getElementById('form-error');
-    formErrorCtn.innerText = 'Les champs ne doivent pas étre vide !'
+    formErrorCtn.innerText = 'Les champs ne doivent pas être vide !'
 
     return false;
   }

@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const models = require('../models');
 
+//contrôle
 const checkMail = (mail) => {
   let regExpMail = new RegExp("^[0-9a-zA-Z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}");
   return regExpMail.test(mail);
@@ -17,12 +18,12 @@ const checkPassword = (password) => {
 };
 
 const checkUsername = (username) => {
-  let regExpUsername = new RegExp("^[0-9a-zA-Z-@_]{4,10}");
+  let regExpUsername = new RegExp("^[0-9a-zA-Z-@_]{2,10}");
   return regExpUsername.test(username);
 };
 
-//signup
 
+//signup
 exports.signup = async (req, res, next) => {
   const email = req.body.email;
   const username = req.body.username;
@@ -47,7 +48,7 @@ exports.signup = async (req, res, next) => {
   if (checkMail(email) === true && checkUsername(username) === true && checkPassword(password) === true) {
 
     models.User.findOne({
-      where: { email: email }
+      where: { email: email, username: username, password: password }
     })
       .then(user => {
         if (!user) {
@@ -75,8 +76,8 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-//login
 
+//login
 exports.login = (req, res, next) => {
 
   const username = req.body.username;
@@ -95,7 +96,8 @@ exports.login = (req, res, next) => {
         if (!user) {
           return res.status(401).json({ error: 'user not found !' });
         }
-        bcrypt.compare(password, user.password) //on compare le mdp utilisateur et le hash
+        //on compare le mdp utilisateur et le hash
+        bcrypt.compare(password, user.password)
           .then(valid => {
             if (!valid) {
               return res.status(401).json({ error: 'Wrong password. please try again' });
@@ -203,9 +205,8 @@ exports.updateUser = (req, res, next) => {
 };
 
 
-//delete user
-
 /*
+* delete user
 * requete (id, mdp);
 * On cherche l'utilisateur
 * on compare son mdp à celui passé dans la req

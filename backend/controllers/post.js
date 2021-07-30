@@ -5,7 +5,6 @@ const fs = require('fs');
 const title_limit = 2;
 const content_limit = 4;
 
-
 //routes 
 
 //create a post
@@ -119,20 +118,14 @@ exports.deletePost = (req, res, next) => {
   const isAdmin = req.body.isAdmin;
   const id = req.params.id;
 
-
-
-  console.log('isAdmin: ', isAdmin)
-  console.log('currentUserId: ', currentUserId)
   models.Post.destroy({
     where: { id: id }
   })
     .then(() => {
       if (isAdmin || currentUserId == post.userId) {
-        console.log(' autorise')
         res.status(200).json(
           { message: "successfully deleted! " });
       } else {
-        console.log('pas autorise')
         res.status(401).json({ message: "Unauthorized to delete this comment" });
       };
     })

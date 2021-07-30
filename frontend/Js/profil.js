@@ -38,6 +38,7 @@ userById();
 
 function displayUserById(userValues) {
   let date = new Date(userValues.user.createdAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" });
+  let dateUpdate = new Date(userValues.user.updatedAt).toLocaleDateString('fr-FR', { year: "numeric", month: "long", day: "numeric" });
   const username = document.createElement('p')
   username.classList.add('profil__userame');
   username.innerHTML = "<span class='paragraphColor'>Pseudo : </span>" + userValues.user.username;
@@ -56,7 +57,7 @@ function displayUserById(userValues) {
 
   const updatedAt = document.createElement('p')
   updatedAt.classList.add('profil__update');
-  updatedAt.innerHTML = "<span class='paragraphColor'>Mis à jour : </span>" + userValues.user.updatedAt.slice(2, 10);
+  updatedAt.innerHTML = "<span class='paragraphColor'>Mis à jour : </span>" + dateUpdate;
 
   document.getElementById("profil__data").append(username, isAdmin, email, createdAt, updatedAt)
 }
@@ -181,9 +182,15 @@ const checkForSubmit = (form) => {
         })
       })
         .then(response => {
-          modify.style.display = "none";
           let infoElt = document.getElementById('info');
-          infoElt.innerText = "Modification effectué"
+          if (password.value === modifyPassword.value) {
+            modify.style.display = "none";
+            infoElt.innerText = "Modification effectué"
+          } else {
+            modify.style.display = "none";
+            infoElt.style.color = "red";
+            infoElt.innerText = "Erreur d'authentification !"
+          }
           return response.json
         })
         .catch(error => {
@@ -202,11 +209,11 @@ const deleteBtn = document.getElementById('deleteUser');
 const deletePassword = document.getElementById('deletPassword');
 
 deleteBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  e.stopPropagation();
 
   let password = deletePassword.value;
-
   deleteUser(password);
-
 });
 
 async function deleteUser(password) {
@@ -226,8 +233,8 @@ async function deleteUser(password) {
   })
     .then(result => {
       remove.style.display = "none";
-      let passwordWarning = document.getElementById('passwordWarning');
-      passwordWarning.innerText = "compte supprimé";
+      let infoElt = document.getElementById('info');
+      infoElt.innerText = "compte supprimé";
       window.location.href = 'index.html';
       return result.json()
     })
